@@ -26,5 +26,5 @@ const moduleSchema = new mongoose.Schema({
     ]
 }, { timestamps: true });
 
-const module = mongoose.model('Module', moduleSchema);
-module.exports = module;
+const Module = mongoose.model('Module', moduleSchema);
+module.exports = Module;

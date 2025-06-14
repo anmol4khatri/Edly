@@ -69,5 +69,5 @@ const educatorSchema = new mongoose.Schema({
   ],
 }, {timestamps: true});
 
-const educator = mongoose.model('Educator', educatorSchema);
-module.exports = educator;
+const Educator = mongoose.model('Educator', educatorSchema);
+module.exports = Educator;
