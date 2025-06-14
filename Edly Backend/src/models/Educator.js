@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose")
 
 const educatorSchema = new mongoose.Schema({
   // Required at registration/account creation
@@ -26,6 +26,7 @@ const educatorSchema = new mongoose.Schema({
   subdomain: {
     type: String,
     unique: true,
+    sparse: true,
     lowercase: true,
     trim: true,
   },
@@ -50,11 +51,6 @@ const educatorSchema = new mongoose.Schema({
     type: [String],
   },
 
-  registeredAt: {
-    type: Date,
-    default: Date.now,
-  },
-
   isVerified: {
     type: Boolean,
     default: false,
@@ -71,7 +67,7 @@ const educatorSchema = new mongoose.Schema({
       ref: 'Course',
     },
   ],
-});
+}, {timestamps: true});
 
-export default mongoose.model('Educator', educatorSchema);
-
+const educator = mongoose.model('Educator', educatorSchema);
+module.exports = educator;

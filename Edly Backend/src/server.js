@@ -4,10 +4,15 @@ const dotenv = require("dotenv");
 const app = express();
 
 const connectDb = require("./config/database");
+const authEducatorRoutes = require("./routes/authEducatorRoutes");
 
 dotenv.config();
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    http: true
+}))
+
+app.use("/", authEducatorRoutes);
 
 connectDb()
     .then(() => {
