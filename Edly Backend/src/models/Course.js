@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
+
+    educatorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Educator',
+        required: true,
+    },
     title: {
         type: String,
         required: true,
@@ -42,7 +48,7 @@ const courseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Module",
     }],
-}, {timestamps: true});
+}, { timestamps: true });
 
 const Course = mongoose.model('Course', courseSchema);
 module.exports = Course;

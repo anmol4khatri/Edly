@@ -1,7 +1,8 @@
-const Course = require("../models/Course")
+const Course = require("../models/Course");
+const validator = require("validator");
 
 const createCourse = async (req, res) => {
-    const { isProfileComplete } = req.educator;
+    const { _id, isProfileComplete } = req.educator;
     const { title, description, thumbnail, price, aboutCourse, highlights } = req.body;
 
     // Manual Validations
@@ -36,7 +37,7 @@ const createCourse = async (req, res) => {
     // Main Logic
     try {
         const course = new Course({
-            title, description, thumbnail, price, aboutCourse, highlights
+            educatorId: _id, title, description, thumbnail, price, aboutCourse, highlights
         });
 
         const savedCourse = await course.save(); 
@@ -47,6 +48,19 @@ const createCourse = async (req, res) => {
     }
 };
 
+const getAllCourses = async (req, res) => {
+    const { _id } = req.educator;
+    
+    try {
+        const courses = await Course.find({ educatorId: _id });
+        res.status(200).json(courses);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+
 module.exports = {
     createCourse,
+    getAllCourses,
 }
