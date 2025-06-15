@@ -1,5 +1,6 @@
 const Course = require("../models/Course");
 const validator = require("validator");
+const Educator = require("../models/Educator");
 
 const createCourse = async (req, res) => {
     const { _id, isProfileComplete } = req.educator;
@@ -41,6 +42,13 @@ const createCourse = async (req, res) => {
         });
 
         const savedCourse = await course.save(); 
+
+        await Educator.findByIdAndUpdate(
+            _id,
+            { $push: { coursesCreated: savedCourse._id } },
+            { new: true }
+        );
+
         res.status(201).json({ message: "Course created", course: savedCourse });
 
     } catch (err) {
@@ -72,6 +80,11 @@ const deleteCourse = async (req, res) => {
         if (!deleted) {
             return res.status(404).json({ error: "Course not found or unauthorized" });
         }
+
+         await Educator.findByIdAndUpdate(
+            _id,
+            { $pull: { coursesCreated: courseId } }
+        );
 
         res.status(200).json({ message: "Course deleted successfully" });
 
