@@ -59,8 +59,30 @@ const getAllCourses = async (req, res) => {
     }
 };
 
+const deleteCourse = async (req, res) => {
+    const { _id } = req.educator;
+    const { courseId } = req.body;
+
+    try {
+        const deleted = await Course.findOneAndDelete({
+            _id: courseId,
+            educatorId: _id
+        });
+
+        if (!deleted) {
+            return res.status(404).json({ error: "Course not found or unauthorized" });
+        }
+
+        res.status(200).json({ message: "Course deleted successfully" });
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
 
 module.exports = {
     createCourse,
     getAllCourses,
+    deleteCourse
 }

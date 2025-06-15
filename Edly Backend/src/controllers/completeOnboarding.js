@@ -21,7 +21,7 @@ const completeOnboarding = async (req, res) => {
             qualifications,
             isProfileComplete: true,
         }, { new: true, runValidators: true });
-        updated.save();
+        await updated.save();
 
         res.status(200).json({ message: "Onboarding completed", educator: updated });
     } catch (err) {
