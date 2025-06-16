@@ -39,7 +39,8 @@ const createModule = async (req, res) => {
 
         const newModule = await Module.create({
             title,
-            content: processedContent
+            content: processedContent,
+            courseId
         });
 
         await Courses.findByIdAndUpdate(
@@ -50,7 +51,7 @@ const createModule = async (req, res) => {
 
         res.status(201).json({
             message: "Module created successfully",
-            module: newModule
+            module: newModule,
         });
 
     } catch (error) {
