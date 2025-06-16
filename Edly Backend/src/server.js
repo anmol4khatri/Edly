@@ -7,7 +7,7 @@ const app = express();
 const connectDb = require("./config/database");
 const authEducatorRoutes = require("./routes/authEducatorRoutes");
 const onBoardingRoutes = require("./routes/onBoardingRoutes");
-const educatorCourseRoutes = require("./routes/educatorCourceRoutes");
+const educatorCourseRoutes = require("./routes/courceManagementRoutes");
 
 dotenv.config();
 app.use(express.json());
