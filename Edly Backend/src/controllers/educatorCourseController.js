@@ -1,42 +1,19 @@
 const Course = require("../models/Course");
-const validator = require("validator");
 const Educator = require("../models/Educator");
+const validateCourseData = require("../utils/validateCourseData");
 
 const createCourse = async (req, res) => {
     const { _id, isProfileComplete } = req.educator;
     const { title, description, thumbnail, price, aboutCourse, highlights } = req.body;
 
-    // Manual Validations
     if(!isProfileComplete){
         return res.status(400).josn({error: "Incomplete registration / Not onboarded yet"});
     }
 
-    if (!title || typeof title !== "string" || title.trim().length === 0 || title.length > 100) {
-        return res.status(400).json({ error: "Title is required and must be less than 100 characters" });
-    }
-
-    if (!description || typeof description !== "string" || description.trim().length === 0 || description.length > 300) {
-        return res.status(400).json({ error: "Description is required and must be less than 300 characters" });
-    }
-
-    if (!thumbnail || typeof thumbnail !== "string" || !validator.isURL(thumbnail)) {
-        return res.status(400).json({ error: "Thumbnail must be a valid URL" });
-    }
-
-    if (typeof price !== "number" || price < 0) {
-        return res.status(400).json({ error: "Price must be a non-negative number" });
-    }
-
-    if (!Array.isArray(aboutCourse) || aboutCourse.length === 0 || aboutCourse.length > 6) {
-        return res.status(400).json({ error: "aboutCourse must be an array with up to 6 items" });
-    }
-
-    if (!Array.isArray(highlights) || highlights.length === 0 || highlights.length > 6) {
-        return res.status(400).json({ error: "highlights must be an array with up to 6 items" });
-    }
-
-    // Main Logic
     try {
+
+        validateCourseData(req.body); // Manual Validation (utility function)
+
         const course = new Course({
             educatorId: _id, title, description, thumbnail, price, aboutCourse, highlights
         });
@@ -71,37 +48,13 @@ const updateCourse = async (req, res) => {
     const { _id: educatorId } = req.educator;
     const { _id, title, description, thumbnail, price, aboutCourse, highlights } = req.body;
 
-    // Validations
     if (!_id) {
         return res.status(400).json({ error: "Course ID is required." });
     }
 
-    if (!title || typeof title !== "string" || title.trim().length === 0 || title.length > 100) {
-        return res.status(400).json({ error: "Title is required and must be less than 100 characters." });
-    }
-
-    if (!description || typeof description !== "string" || description.trim().length === 0 || description.length > 300) {
-        return res.status(400).json({ error: "Description is required and must be less than 300 characters." });
-    }
-
-    if (!thumbnail || typeof thumbnail !== "string" || !validator.isURL(thumbnail)) {
-        return res.status(400).json({ error: "Thumbnail must be a valid URL." });
-    }
-
-    if (typeof price !== "number" || price < 0) {
-        return res.status(400).json({ error: "Price must be a non-negative number." });
-    }
-
-    if (!Array.isArray(aboutCourse) || aboutCourse.length === 0 || aboutCourse.length > 6) {
-        return res.status(400).json({ error: "aboutCourse must be an array with up to 6 items." });
-    }
-
-    if (!Array.isArray(highlights) || highlights.length === 0 || highlights.length > 6) {
-        return res.status(400).json({ error: "highlights must be an array with up to 6 items." });
-    }
-
-    // Main Logic
     try {
+        validateCourseData(req.body); // Manual Validation (utility function)
+
         const course = await Course.findOne({ _id, educatorId });
         if (!course) {
             return res.status(404).json({ error: "Course not found or unauthorized." });
