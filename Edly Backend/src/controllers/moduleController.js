@@ -59,7 +59,23 @@ const createModule = async (req, res) => {
     }
 };
 
+const getAllModulesByCourse = async (req, res) => {
+  const { courseId } = req.params;
+
+  if (!courseId) {
+    return res.status(400).json({ error: "Course ID is required" });
+  }
+
+  try {
+    const modules = await Module.find({ courseId }).populate('content.refId');
+    res.status(200).json(modules);
+  } catch (err) {
+    res.status(500).json({ error: err.message});
+  }
+};
+
 
 module.exports = {
     createModule,
+    getAllModulesByCourse
 }
