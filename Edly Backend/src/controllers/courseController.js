@@ -67,6 +67,66 @@ const getAllCourses = async (req, res) => {
     }
 };
 
+const updateCourse = async (req, res) => {
+    const { _id: educatorId } = req.educator;
+    const { _id, title, description, thumbnail, price, aboutCourse, highlights } = req.body;
+
+    // Validations
+    if (!_id) {
+        return res.status(400).json({ error: "Course ID is required." });
+    }
+
+    if (!title || typeof title !== "string" || title.trim().length === 0 || title.length > 100) {
+        return res.status(400).json({ error: "Title is required and must be less than 100 characters." });
+    }
+
+    if (!description || typeof description !== "string" || description.trim().length === 0 || description.length > 300) {
+        return res.status(400).json({ error: "Description is required and must be less than 300 characters." });
+    }
+
+    if (!thumbnail || typeof thumbnail !== "string" || !validator.isURL(thumbnail)) {
+        return res.status(400).json({ error: "Thumbnail must be a valid URL." });
+    }
+
+    if (typeof price !== "number" || price < 0) {
+        return res.status(400).json({ error: "Price must be a non-negative number." });
+    }
+
+    if (!Array.isArray(aboutCourse) || aboutCourse.length === 0 || aboutCourse.length > 6) {
+        return res.status(400).json({ error: "aboutCourse must be an array with up to 6 items." });
+    }
+
+    if (!Array.isArray(highlights) || highlights.length === 0 || highlights.length > 6) {
+        return res.status(400).json({ error: "highlights must be an array with up to 6 items." });
+    }
+
+    // Main Logic
+    try {
+        const course = await Course.findOne({ _id, educatorId });
+        if (!course) {
+            return res.status(404).json({ error: "Course not found or unauthorized." });
+        }
+
+        course.title = title;
+        course.description = description;
+        course.thumbnail = thumbnail;
+        course.price = price;
+        course.aboutCourse = aboutCourse;
+        course.highlights = highlights;
+
+        const updatedCourse = await course.save();
+
+        await Educator.findByIdAndUpdate(educatorId, {
+            $addToSet: { coursesCreated: updatedCourse._id } // avoids duplicates
+        });
+
+        return res.status(200).json({ message: "Course updated successfully", course: updatedCourse });
+
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
+
 const deleteCourse = async (req, res) => {
     const { _id } = req.educator;
     const { courseId } = req.body;
@@ -97,5 +157,6 @@ const deleteCourse = async (req, res) => {
 module.exports = {
     createCourse,
     getAllCourses,
-    deleteCourse
+    deleteCourse,
+    updateCourse
 }
