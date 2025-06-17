@@ -8,11 +8,11 @@ const { createModule, getAllModulesByCourse, deleteModule } = require("../contro
 // Course
 router.post("/educator/create_course", requireEducatorAuth, createCourse);
 router.get("/educator/get_all_courses", requireEducatorAuth, getAllCourses);
-router.delete("/educator/delete_course", requireEducatorAuth, deleteCourse);
+router.delete("/educator/delete_course/:courseId", requireEducatorAuth, deleteCourse);
 router.patch("/educator/update_course", requireEducatorAuth, updateCourse);
 
 // Module
-router.post("/educator/create_module", requireEducatorAuth, createModule);
+router.post("/educator/create_module/:courseId", requireEducatorAuth, createModule);
 router.get("/educator/get_all_modules/:courseId", requireEducatorAuth, getAllModulesByCourse);
 router.delete("/educator/delete_module/:courseId/:moduleId", requireEducatorAuth, deleteModule);
 

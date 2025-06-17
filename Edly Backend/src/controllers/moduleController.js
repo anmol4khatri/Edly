@@ -5,7 +5,8 @@ const Module = require("../models/Module");
 const Courses = require("../models/Course");
 
 const createModule = async (req, res) => {
-	const { title, content, courseId } = req.body;
+	const { courseId } = req.params;
+	const { title, content } = req.body;
 
 	if (!title || title.length === 0) {
 		return res.status(400).json({ error: "Title is required and must not be empty" });
@@ -48,6 +49,7 @@ const createModule = async (req, res) => {
 			{ $addToSet: { modules: newModule._id } },
 			{ new: true }
 		);
+
 
 		// Manually populate full content
 		const populatedContent = await Promise.all(
@@ -127,41 +129,41 @@ const getAllModulesByCourse = async (req, res) => {
 };
 
 const deleteModule = async (req, res) => {
-  const { moduleId, courseId } = req.params;
+	const { moduleId, courseId } = req.params;
 
-  if (!moduleId || !courseId) {
-    return res.status(400).json({ error: "Both moduleId and courseId are required" });
-  }
+	if (!moduleId || !courseId) {
+		return res.status(400).json({ error: "Both moduleId and courseId are required" });
+	}
 
-  try {
-    const module = await Module.findOne({ _id: moduleId, courseId });
-    if (!module) {
-      return res.status(404).json({ error: "Module not found for the given course" });
-    }
+	try {
+		const module = await Module.findOne({ _id: moduleId, courseId });
+		if (!module) {
+			return res.status(404).json({ error: "Module not found for the given course" });
+		}
 
-    await Module.deleteOne({ _id: moduleId });
+		await Module.deleteOne({ _id: moduleId });
 
-    await Courses.findByIdAndUpdate(courseId, {
-      $pull: { modules: moduleId },
-    });
+		await Courses.findByIdAndUpdate(courseId, {
+			$pull: { modules: moduleId },
+		});
 
-    // Edge Case: Delete all content (lessons, quizzes, PDFs) associated with the module after the module is deleted.
-    const deleteContentPromises = module.content.map(async (item) => {
-      if (item.type === "lesson") {
-        return Lesson.findByIdAndDelete(item.refId);
-      } else if (item.type === "quiz") {
-        return Quiz.findByIdAndDelete(item.refId);
-      } else if (item.type === "pdf") {
-        return Pdf.findByIdAndDelete(item.refId);
-      }
-    });
+		// Edge Case: Delete all content (lessons, quizzes, PDFs) associated with the module after the module is deleted.
+		const deleteContentPromises = module.content.map(async (item) => {
+			if (item.type === "lesson") {
+				return Lesson.findByIdAndDelete(item.refId);
+			} else if (item.type === "quiz") {
+				return Quiz.findByIdAndDelete(item.refId);
+			} else if (item.type === "pdf") {
+				return Pdf.findByIdAndDelete(item.refId);
+			}
+		});
 
-    await Promise.all(deleteContentPromises);
+		await Promise.all(deleteContentPromises);
 
-    res.status(200).json({ message: "Module and associated content deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ error: err.message || "Module deletion failed" });
-  }
+		res.status(200).json({ message: "Module and associated content deleted successfully" });
+	} catch (err) {
+		res.status(500).json({ error: err.message || "Module deletion failed" });
+	}
 };
 
 

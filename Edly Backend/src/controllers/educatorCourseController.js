@@ -1,13 +1,17 @@
 const Course = require("../models/Course");
 const Educator = require("../models/Educator");
 const validateCourseData = require("../utils/validateCourseData");
+const Module = require("../models/Module");
+const Lesson = require("../models/Lesson");
+const Pdf = require("../models/Pdf");
+const Quiz = require("../models/Quiz");
 
 const createCourse = async (req, res) => {
     const { _id, isProfileComplete } = req.educator;
     const { title, description, thumbnail, price, aboutCourse, highlights } = req.body;
 
     if(!isProfileComplete){
-        return res.status(400).josn({error: "Incomplete registration / Not onboarded yet"});
+        return res.status(400).json({error: "Incomplete registration / Not onboarded yet"});
     }
 
     try {
@@ -76,34 +80,59 @@ const updateCourse = async (req, res) => {
         return res.status(200).json({ message: "Course updated successfully", course: updatedCourse });
 
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ error: err.message });
     }
 };
 
 const deleteCourse = async (req, res) => {
-    const { _id } = req.educator;
-    const { courseId } = req.body;
+  const { _id } = req.educator;
+  const { courseId } = req.params;
 
-    try {
-        const deleted = await Course.findOneAndDelete({
-            _id: courseId,
-            educatorId: _id
-        });
+  try {
+    // Find and delete the course (ensure educator owns it)
+    const deletedCourse = await Course.findOneAndDelete({
+      _id: courseId,
+      educatorId: _id,
+    });
 
-        if (!deleted) {
-            return res.status(404).json({ error: "Course not found or unauthorized" });
-        }
-
-         await Educator.findByIdAndUpdate(
-            _id,
-            { $pull: { coursesCreated: courseId } }
-        );
-
-        res.status(200).json({ message: "Course deleted successfully" });
-
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    if (!deletedCourse) {
+      return res.status(404).json({ error: "Course not found or unauthorized" });
     }
+
+    // Pull course from educator
+    await Educator.findByIdAndUpdate(_id, {
+      $pull: { coursesCreated: courseId },
+    });
+
+    // Find all modules under this course
+    const modules = await Module.find({ courseId });
+
+    // Collect all content IDs to delete
+    const deleteContentPromises = [];
+
+    modules.forEach((module) => {
+      module.content.forEach((item) => {
+        if (item.type === "lesson") {
+          deleteContentPromises.push(Lesson.findByIdAndDelete(item.refId));
+        } else if (item.type === "quiz") {
+          deleteContentPromises.push(Quiz.findByIdAndDelete(item.refId));
+        } else if (item.type === "pdf") {
+          deleteContentPromises.push(Pdf.findByIdAndDelete(item.refId));
+        }
+      });
+    });
+
+    // Delete all modules
+    const deleteModulesPromise = Module.deleteMany({ courseId });
+
+    // Run all deletions
+    await Promise.all([...deleteContentPromises, deleteModulesPromise]);
+
+    res.status(200).json({ message: "Course, modules, and content deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 
