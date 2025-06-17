@@ -48,6 +48,21 @@ const getAllCourses = async (req, res) => {
     }
 };
 
+const getCourseById = async (req, res) => {
+  const { _id } = req.educator;
+  const { courseId } = req.params;
+
+  try {
+    const course = await Course.findOne({
+      educatorId: _id,
+      _id: courseId
+    });
+    res.status(200).json(course);
+  } catch (err) {
+    res.status(500).json({error: err.message});
+  }
+}
+
 const updateCourse = async (req, res) => {
     const { _id: educatorId } = req.educator;
     const { _id, title, description, thumbnail, price, aboutCourse, highlights } = req.body;
@@ -139,6 +154,7 @@ const deleteCourse = async (req, res) => {
 module.exports = {
     createCourse,
     getAllCourses,
+    getCourseById,
     deleteCourse,
     updateCourse
 }
