@@ -8,6 +8,7 @@ const connectDb = require("./config/database");
 const authEducatorRoutes = require("./routes/authEducatorRoutes");
 const onBoardingRoutes = require("./routes/onBoardingRoutes");
 const educatorCourseRoutes = require("./routes/courceManagementRoutes");
+const authStudentRoutes = require("./routes/authStudentRoutes");
 
 dotenv.config();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(cors({
 app.use("/", authEducatorRoutes);
 app.use("/", onBoardingRoutes);
 app.use("/", educatorCourseRoutes);
+app.use("/", authStudentRoutes);
 
 connectDb()
     .then(() => {
