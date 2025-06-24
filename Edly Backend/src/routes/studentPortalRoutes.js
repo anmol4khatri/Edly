@@ -3,13 +3,12 @@ const router = express.Router();
 
 const requireStudentAuth = require("../middlewares/requireStudentAuth");
 const resolveEducatorFromSubdomain = require("../middlewares/resolveEducatorFromSubdomain");
+const getCoursesWithEnrollmentStatus = require("../controllers/getCoursesWithEnrollmentStatus");
 
-// router.get("/testRoute", requireStudentAuth, resolveEducatorFromSubdomain, (req, res) => {
-//     const data = req.resolveEducatorFromSubdomain;
-//     const loggedInStudent = req.student;
-//     console.log(loggedInStudent);
-//     console.log(data);
-//     res.send("accessed");
-// })
+router.get("/student/courses",
+    requireStudentAuth,
+    resolveEducatorFromSubdomain,
+    getCoursesWithEnrollmentStatus
+);
 
 module.exports = router;
