@@ -1,6 +1,11 @@
-const mongoose =  require("mongoose");
+const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema({
+    educatorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Educator",
+        required: true
+    },
     firstName: {
         type: String,
         minlength: 2,
@@ -15,15 +20,17 @@ const studentSchema = new mongoose.Schema({
     },
     emailId: {
         type: String,
-        unique: true,
         required: true
     },
     password: {
         type: String,
         minlength: 8,
         required: true
-    } 
+    }
 });
+
+// 👇 Ensure unique email per educator
+studentSchema.index({ emailId: 1, educatorId: 1 }, { unique: true });
 
 const Student = mongoose.model("Student", studentSchema);
 module.exports = Student;

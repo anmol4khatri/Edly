@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const Student = require("../models/Student");
 
-const requireStudentAuth = (req, res, next) => {
+const requireStudentAuth = async (req, res, next) => {
     const token = req?.cookies?.token;
 
     try {
@@ -13,7 +13,7 @@ const requireStudentAuth = (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const { id } = decoded;
 
-        const student = Student.findById(id);
+        const student = await Student.findById(id);
         if(!student) {
             return res.status(404).json({error: "User not found !!"});
         }

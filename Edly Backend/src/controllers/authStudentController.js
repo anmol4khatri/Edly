@@ -6,6 +6,7 @@ const Student = require("../models/Student");
 
 // Sign up
 const registerStudent = async (req, res) => {
+    const educatorId = req.educatorFromSubdomain._id;
     const { firstName, lastName, emailId, password, confirmPassword } = req.body;
 
     try {
@@ -19,7 +20,7 @@ const registerStudent = async (req, res) => {
             return res.status(400).json({ error: "Passwords do not match" });
         };
 
-        const existingAccount = await Student.findOne({ emailId });
+        const existingAccount = await Student.findOne({ emailId, educatorId });
         if (existingAccount) {
             return res.status(400).json({ error: "Account already exists" });
         };
@@ -27,6 +28,7 @@ const registerStudent = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const student = new Student({
+            educatorId,
             firstName,
             lastName,
             emailId,
@@ -47,6 +49,7 @@ const registerStudent = async (req, res) => {
 
 // Login
 const loginStudent = async (req, res) => {
+    const educatorId = req.educatorFromSubdomain;
     const { emailId, password } = req.body;
 
     try {
@@ -61,7 +64,7 @@ const loginStudent = async (req, res) => {
             return res.status(400).json({ error: "Password is required" });
         }
 
-        const student = await Student.findOne({ emailId });
+        const student = await Student.findOne({ emailId, educatorId });
         if (!student) {
             return res.status(404).json({ error: "invalid credentials" });
             // no need to sepcify "account does not exists"
