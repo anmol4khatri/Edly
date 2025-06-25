@@ -6,6 +6,7 @@ const resolveEducatorFromSubdomain = require("../middlewares/resolveEducatorFrom
 const getCoursesWithEnrollmentStatus = require("../controllers/getCoursesWithEnrollmentStatus");
 const getCoursePreview = require("../controllers/getCoursePreview");
 const getEnrolledCourse = require("../controllers/getEnrolledCourse");
+const enrollInCourse  = require("../controllers/enrollInCourse");
 
 // Get all courses with Enrollment Status ("isEnrolled" Flag)
 router.get("/student/courses",
@@ -24,6 +25,12 @@ router.get("/student/course/:courseId", // for students who are enrolled into th
     requireStudentAuth,
     resolveEducatorFromSubdomain,
     getEnrolledCourse
+);
+
+router.post("/student/course/enroll",
+    requireStudentAuth,
+    resolveEducatorFromSubdomain,
+    enrollInCourse
 );
 
 module.exports = router;
