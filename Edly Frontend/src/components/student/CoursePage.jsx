@@ -1,9 +1,11 @@
 import CourseHero from "../CourseHero"
+import CourseHighlights from "../CourseHighlights";
 
 const CoursePage = () => {
   return (
-    <div>
+    <div className="px-16">
       <CourseHero />
+      <CourseHighlights />
     </div>
   )
 }
