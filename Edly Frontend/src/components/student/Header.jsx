@@ -19,12 +19,12 @@ const navigationLinks = [
     type: "description",
     items: [
       {
-        href: "#",
+        href: "/enrolled",
         label: "Enrolled Courses",
         description: "View all the courses you are enrolled in",
       },
       {
-        href: "#",
+        href: "/browse",
         label: "Available Courses",
         description: "Browse all the available courses",
       },

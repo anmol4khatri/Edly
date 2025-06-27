@@ -3,7 +3,7 @@ import Header from "./student/Header";
 
 const Body = () => {
   return (
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen dark bg-background text-foreground">
         <Header />
           <Outlet />
       </div>
