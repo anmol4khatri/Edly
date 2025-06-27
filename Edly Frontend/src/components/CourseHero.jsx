@@ -6,8 +6,8 @@ const CourseHero = () => {
         <div className="px-16 py-5">
             <Card>
                 <CardHeader>
-                    <CardTitle class="text-4xl w-6/10 font-extrabold pb-5">Docker and Kubernetes for beginners | DevOps journey</CardTitle>
-                    <CardDescription class="text-xl w-6/10">Docker & Kubernetes Masterclass: Build, Deploy, & Scale on AWS, Azure, & GCP.</CardDescription>
+                    <CardTitle className="text-4xl w-6/10 font-extrabold pb-5">Docker and Kubernetes for beginners | DevOps journey</CardTitle>
+                    <CardDescription className="text-xl w-6/10">Docker & Kubernetes Masterclass: Build, Deploy, & Scale on AWS, Azure, & GCP.</CardDescription>
                 </CardHeader>
                 <CardFooter>
                     <RatingDisplay rating={4.8} />
