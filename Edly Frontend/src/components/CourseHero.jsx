@@ -6,7 +6,7 @@ import { Clock9 } from 'lucide-react';
 const CourseHero = () => {
     return (
         <div className="py-5">
-            <Card>
+            <Card className="h-60">
                 <CardHeader>
                     <CardTitle className="text-4xl w-6/10 font-extrabold pb-5">Docker and Kubernetes for beginners | DevOps journey</CardTitle>
                     <CardDescription className="text-xl w-6/10">Docker & Kubernetes Masterclass: Build, Deploy, & Scale on AWS, Azure, & GCP.</CardDescription>

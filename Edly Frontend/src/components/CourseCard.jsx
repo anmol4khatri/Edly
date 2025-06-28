@@ -23,8 +23,8 @@ const CourseCard = ({ price, action }) => {
 			</CardHeader>
 			<CardFooter className={footerClasses}>
 				{price && (
-					<span className="flex text-xl">
-						<IndianRupee className="size-7 py-1" />
+					<span className="flex text-2xl pt-1">
+						<IndianRupee className="size-8 py-1" strokeWidth={3}/>
 						{price}
 					</span>
 				)}
