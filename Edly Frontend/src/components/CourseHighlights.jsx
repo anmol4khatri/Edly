@@ -1,5 +1,5 @@
 import { CircleCheckBig } from 'lucide-react';
-import { Button, buttonVariants } from "../components/ui/button";
+import { Button } from "../components/ui/button";
 import { useState } from "react";
 
 const CourseHighlights = () => {
@@ -42,7 +42,7 @@ const CourseHighlights = () => {
                         </div>
                         </>)}
                         <div>
-                            <Button variant={"link"} className="pl-8" onClick={handleReadMore}> {!isExpended ? "Read More" : "Collapse"} </Button>
+                            <Button variant={"link"} className="pl-8 pt-0" onClick={handleReadMore}> {!isExpended ? "Read More" : "Collapse"} </Button>
                         </div>
                 </div>
             </div>
