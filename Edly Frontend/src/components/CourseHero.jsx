@@ -7,9 +7,9 @@ const CourseHero = () => {
     return (
         <div className="py-5">
             {/* Mobile Layout */}
-            <div className="block lg:hidden space-y-6">
+            <div className="block lg:hidden">
                 {/* Course Thumbnail */}
-                <div className="w-full">
+                <div className="w-full pb-6">
                     <img
                         src='https://ik.imagekit.io/sheryians/courses_gif/undefined-maxresdefault_5-AHh9_1Y.jpg'
                         alt='Course Thumbnail'
@@ -18,7 +18,7 @@ const CourseHero = () => {
                 </div>
 
                 {/* Title and Description */}
-                <div className="space-y-4">
+                <div className="space-y-2 pb-3">
                     <h1 className="text-2xl md:text-3xl font-extrabold leading-tight">
                         Docker and Kubernetes for beginners | DevOps journey
                     </h1>
@@ -29,16 +29,17 @@ const CourseHero = () => {
 
                 {/* Rating, Language, and Duration */}
                 <div className="flex flex-wrap items-center gap-4 text-sm md:text-base">
-                    <RatingDisplay rating={4.8} />
-                    <span className='text-muted-foreground'>|</span>
+                    <div className="w-full">
+                        <RatingDisplay rating={4.8} />
+                    </div>
                     <span className="flex items-center gap-2">
-                        <Globe className="w-4 h-4" />
-                        <span>English</span>
+                        <Globe className="w-4 h-4 text-primary" />
+                        <span className='text-muted-foreground'>English</span>
                     </span>
                     <span className='text-muted-foreground'>|</span>
                     <span className="flex items-center gap-2">
-                        <Clock9 className="w-4 h-4" />
-                        <span>8 Hours</span>
+                        <Clock9 className="w-4 h-4 text-primary" />
+                        <span className='text-muted-foreground'>8 Hours</span>
                     </span>
                 </div>
             </div>

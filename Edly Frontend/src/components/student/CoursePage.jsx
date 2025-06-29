@@ -20,9 +20,9 @@ const CoursePage = () => {
 		<div className="min-h-screen bg-background">
 			{/* Mobile Layout */}
 			<div className="block lg:hidden">
-				<div className="px-4 py-6 space-y-8">
+				<div className="px-4 py-0">
 					<CourseHero />
-					<div className="pt-6">
+					<div className="">
 						<CourseBanner />
 					</div>
 					<CourseHighlights />

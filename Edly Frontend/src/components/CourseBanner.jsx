@@ -74,9 +74,9 @@ const CourseBanner = () => {
 			{/* Mobile: CourseIncludes-style layout */}
 			<div className="block lg:hidden space-y-6">
 				{/* Price and Enroll Button */}
-				<div className="space-y-4">
+				<div className="space-y-2">
 					<span className="flex text-2xl md:text-3xl font-bold">
-						<IndianRupee className="size-6 md:size-7" strokeWidth={3} />
+						<IndianRupee className="size-7 md:size-7 pt-1" strokeWidth={3} />
 						<span>5999</span>
 					</span>
 					<Button size={"lg"} className="text-lg font-bold w-full">Enroll Now</Button>
@@ -84,7 +84,7 @@ const CourseBanner = () => {
 
 				{/* Course Includes Section */}
 				<div className="space-y-4">
-					<h3 className="text-xl md:text-2xl font-semibold">Course includes:</h3>
+					<h3 className="text-xl md:text-2xl font-semibold">This course includes:</h3>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
 						{courseFeatures.map((feature, index) => (
 							<div key={index} className="flex items-center gap-3 text-sm md:text-base">
