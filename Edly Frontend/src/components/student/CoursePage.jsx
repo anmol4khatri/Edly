@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CourseHero from "../CourseHero"
 import CourseHighlights from "../CourseHighlights";
 import CourseBanner from "../CourseBanner"
+import CourseAccordion from "../CourseAccordion";
 
 const CoursePage = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -34,6 +35,7 @@ const CoursePage = () => {
 				<div className="w-full">
 					<CourseHero />
 					<CourseHighlights />
+					<CourseAccordion />
 				</div>
 
 				{/* Banner with dynamic positioning based on scroll */}
