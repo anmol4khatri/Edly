@@ -40,32 +40,32 @@ const CourseBanner = () => {
 					</span>
 					<Button size={"lg"} className="text-lg font-bold">Enroll Now</Button>
 				</CardHeader>
-				<CardFooter className='gap-3 max-sm:flex-col max-sm:items-stretch'>
+				<CardFooter className='max-sm:flex-col max-sm:items-stretch'>
 					<div>
-						<h1 className='text-2xl font-bold'>Course Includes</h1>
+						<h1 className='text-2xl font-bold pt-5 pb-3'>This course includes:</h1>
 						<div className="flex gap-2 text-lg pb-2">
-							<Clock9 className="p-0.5" />
-							<p>19 hours high quality content</p>
+							<Clock9 className="p-0.5 text-primary" />
+							<p className='text-[#a3a4a6]'>19 hours high quality content</p>
 						</div>
 						<div className="flex gap-2 text-lg  pb-2">
-							<FolderKey className="p-0.5" />
-							<p>More than 18 Quizes</p>
+							<FolderKey className="p-0.5 text-primary" />
+							<p  className='text-[#a3a4a6]'>More than 18 Quizes</p>
 						</div>
 						<div className="flex gap-2 text-lg pb-2">
-							<Download className="p-0.5" />
-							<p>13 downloadable resources</p>
+							<Download className="p-0.5 text-primary" />
+							<p  className='text-[#a3a4a6]'>13 downloadable resources</p>
 						</div>
 						<div className="flex gap-2 text-lg pb-2">
-							<ChartLine className="p-0.5" />
-							<p>Industry grade project</p>
+							<ChartLine className="p-0.5 text-primary" />
+							<p  className='text-[#a3a4a6]'>Industry grade project</p>
 						</div>
 						<div className="flex gap-2 text-lg pb-2">
-							<Infinity className="p-0.5" />
-							<p>Life time access</p>
+							<Infinity className="p-0.5 text-primary" />
+							<p  className='text-[#a3a4a6]'>Life time access</p>
 						</div>
 						<div className="flex gap-2 text-lg pb-2">
-							<Trophy className="p-0.5" />
-							<p>Certificate of completion</p>
+							<Trophy className="p-0.5 text-primary" />
+							<p  className='text-[#a3a4a6]'>Certificate of completion</p>
 						</div>
 					</div>
 				</CardFooter>

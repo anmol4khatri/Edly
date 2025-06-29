@@ -47,9 +47,9 @@ const Rating = ({ rating }) => {
                 <EmptyStar key={`empty-${i}`} />
             ))}
             
-            <p className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">{rating}</p>
-            <p className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">out of</p>
-            <p className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">5</p>
+            <p className="ms-1 text-md font-medium text-gray-500 dark:text-gray-300">{rating}</p>
+            <p className="ms-1 text-md font-medium text-gray-500 dark:text-gray-300">out of</p>
+            <p className="ms-1 text-md font-medium text-gray-500 dark:text-gray-300">5</p>
         </div>
     );
 };
