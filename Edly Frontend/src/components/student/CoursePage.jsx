@@ -27,6 +27,7 @@ const CoursePage = () => {
 						<CourseBanner />
 					</div>
 					<CourseHighlights />
+					<CourseAccordion />
 				</div>
 			</div>
 

@@ -166,27 +166,33 @@ const CourseAccordion = () => {
     console.log(data);
   }
   return (
-    (<div className="px-3 py-5 bg-red-500 w-8/12">
-      <h2 className="text-xl font-bold">Comprehensive Course Modules</h2>
+    (<div className="px-2 py-5 w-8/12 space-y-5 mt-5 max-sm:px-0 max-sm:w-full max-sm:space-y-4 max-sm:mt-0">
+      <h3 className="text-2xl font-bold max-sm:text-xl">Comprehensive Course Modules</h3>
       <Accordion type="single" collapsible className="-space-y-px w-12/12" defaultValue="3">
         {modules.map((module) => (
           <AccordionItem
             value={module._id}
             key={module._id}
-            className="bg-background has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative border px-4 py-1 outline-none first:rounded-t-md last:rounded-b-md last:border-b has-focus-visible:z-10 has-focus-visible:ring-[3px]">
+            className="bg-card has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative border px-4 py-1 outline-none first:rounded-t-md last:rounded-b-md last:border-b has-focus-visible:z-10 has-focus-visible:ring-[3px]">
             <AccordionTrigger
-              className="py-2 text-[15px] leading-6 hover:no-underline focus-visible:ring-0">
+              className="py-4 text-md leading-6 hover:no-underline focus-visible:ring-0 cursor-pointer">
               {module.title}
             </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground pb-2">
+            <AccordionContent className="text-muted-foreground bg-[#2B2F37] p-5 m-2 rounded">
               {module.content.map(item => (
-                <div key={item.data._id} className="flex gap-10" onClick={() => handleItemClick(item.data)}>
-                  <span>
+                <div key={item.data._id} className="flex gap-3 p-1.5 w-full" onClick={() => handleItemClick(item.data)}>
+                  <span className="text-primary">
                     {item.type === "lesson" ? <Video /> :
                       item.type === "pdf" ? <NotebookPen /> :
                         <Key />}
                   </span>
-                  <p>{item.data.title}</p>
+                  {/* Content - Desktop View */}
+                  <span className="max-sm:hidden text-[16px] mt-0.5 text-[#a3a4a6] w-full cursor-pointer flex justify-between">
+                    <span className="hover:text-white">{item.data.title}</span>
+                    <span className="">2 hours</span>
+                  </span>
+                  {/* Content - Mobile View */}
+
                 </div>
               ))}
             </AccordionContent>
