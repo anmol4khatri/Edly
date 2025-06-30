@@ -192,7 +192,10 @@ const CourseAccordion = () => {
                     <span className="">2 hours</span>
                   </span>
                   {/* Content - Mobile View */}
-
+                  <span className="min-sm:hidden text-[16px] mt-0.5 text-[#a3a4a6] w-full cursor-pointer">
+                    <span className="hover:text-white">{item.data.title}</span>
+                    <span className=""> | 2 hrs</span>
+                  </span>
                 </div>
               ))}
             </AccordionContent>
