@@ -3,6 +3,8 @@ import CourseHero from "../CourseHero"
 import CourseHighlights from "../CourseHighlights";
 import CourseBanner from "../CourseBanner"
 import CourseAccordion from "../CourseAccordion";
+import CourseReview from "../CourseReview";
+import CourseRating from "../CourseRating";
 
 const CoursePage = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -28,6 +30,7 @@ const CoursePage = () => {
 					</div>
 					<CourseHighlights />
 					<CourseAccordion />
+					<CourseReview />
 				</div>
 			</div>
 
@@ -37,6 +40,8 @@ const CoursePage = () => {
 					<CourseHero />
 					<CourseHighlights />
 					<CourseAccordion />
+					<CourseRating />
+					<CourseReview />
 				</div>
 
 				{/* Banner with dynamic positioning based on scroll */}
