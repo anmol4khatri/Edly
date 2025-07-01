@@ -50,10 +50,9 @@ export default function CustomerReviews() {
     ]
 
     return (
-        <div className="w-7/11 px-2">
+        <div className="w-7/11 px-2 max-sm:w-full max-sm:px-0">
             <div className="max-w-lg">
-                <Card className="">
-                    {/* can add bg-transparent in upper card component */}
+                <Card className="max-sm:bg-transparent max-sm:border-none">
                     <CardContent className="p-4 text-center">
                         {/* Header */}
                         <div className="mb-4">
