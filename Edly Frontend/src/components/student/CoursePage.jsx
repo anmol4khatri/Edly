@@ -30,6 +30,7 @@ const CoursePage = () => {
 					</div>
 					<CourseHighlights />
 					<CourseAccordion />
+					<CourseRating />
 					<CourseReview />
 				</div>
 			</div>

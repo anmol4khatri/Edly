@@ -74,8 +74,7 @@ const CourseReview = () => {
 			<div className="max-w-2xl mx-20 max-sm:w-full max-sm:mx-0">
 				{/* Header */}
 				<div className="sticky top-0 bg-black/80 backdrop-blur-md border-b border-gray-800 p-4">
-					<h1 className="text-xl font-bold text-white">Course Reviews</h1>
-					<p className="text-gray-400 text-sm mt-1">What students are saying</p>
+					<h1 className="text-xl font-bold text-white">Recent Reviews</h1>
 				</div>
 
 				{/* Reviews Feed */}
