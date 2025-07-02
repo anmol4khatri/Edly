@@ -1,5 +1,3 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -50,9 +48,9 @@ export default function CustomerReviews() {
     ]
 
     return (
-        <div className="w-7/11 px-2 max-sm:w-full max-sm:px-0">
-            <div className="max-w-lg">
-                <Card className="max-sm:bg-transparent max-sm:border-none">
+        <div className="w-8/12 px-2 max-sm:w-full max-sm:px-0">
+            <div className="max-w-4xl">
+                <Card className="max-sm:bg-transparent max-sm:border-none ">
                     <CardContent className="p-4 text-center">
                         {/* Header */}
                         <div className="mb-4">
@@ -60,7 +58,8 @@ export default function CustomerReviews() {
                             <p className="text-slate-400">What our students are saying</p>
                         </div>
 
-                        {/* Rating Display */}
+                        <div className="min-sm:flex min-sm:gap-10">
+                            {/* Rating Display */}
                         <div className="mb-4">
                             <div className="text-5xl font-bold text-white mb-2">4.7</div>
 
@@ -74,24 +73,25 @@ export default function CustomerReviews() {
                             <p className="text-slate-400">Based on 827 reviews</p>
                         </div>
 
-                        {/* Rating Breakdown */}
-                        <div className="mb-6 space-y-2">
-                            {reviewData.map((item) => (
-                                <div key={item.stars} className="flex items-center gap-4">
-                                    <div className="text-slate-300 font-medium w-16 text-left">{item.stars} stars</div>
-                                    <div className="flex-1">
-                                        <Progress
-                                            value={item.percentage}
-                                            className="h-3 bg-slate-700"
-                                            style={{
-                                                "--progress-background": "rgb(51 65 85)",
-                                                "--progress-foreground": "rgb(139 92 246)",
-                                            }}
-                                        />
+                            {/* Rating Breakdown */}
+                            <div className="mb-6 space-y-2 min-sm:w-2xl">
+                                {reviewData.map((item) => (
+                                    <div key={item.stars} className="flex items-center gap-4">
+                                        <div className="text-slate-300 font-medium w-16 text-left">{item.stars} stars</div>
+                                        <div className="flex-1">
+                                            <Progress
+                                                value={item.percentage}
+                                                className="h-3 bg-slate-700"
+                                                style={{
+                                                    "--progress-background": "rgb(51 65 85)",
+                                                    "--progress-foreground": "rgb(139 92 246)",
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="text-slate-300 font-medium w-12 text-right">{item.count}</div>
                                     </div>
-                                    <div className="text-slate-300 font-medium w-12 text-right">{item.count}</div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
 
                         {/* Write Review Button */}
