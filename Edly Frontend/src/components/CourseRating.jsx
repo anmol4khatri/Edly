@@ -48,12 +48,17 @@ export default function CustomerReviews() {
     ]
 
     return (
-        <div className="w-8/12 px-2 max-sm:w-full max-sm:px-0">
+        <div className="w-8/12 px-2 max-sm:w-full max-sm:px-0 min-sm:mb-2">
+            {/* Header*/}
+            <div className="mb-4 max-sm:hidden">
+                <h1 className="text-3xl font-bold text-white mb-2">Course Reviews</h1>
+                <p className="text-slate-400">What our students are saying</p>
+            </div>
             <div className="max-w-4xl">
                 <Card className="max-sm:bg-transparent max-sm:border-none ">
                     <CardContent className="p-4 text-center">
-                        {/* Header */}
-                        <div className="mb-4">
+                        {/* Header Mobile*/}
+                        <div className="mb-4 min-sm:hidden">
                             <h1 className="text-3xl font-bold text-white mb-2">Course Reviews</h1>
                             <p className="text-slate-400">What our students are saying</p>
                         </div>

@@ -166,7 +166,7 @@ const CourseAccordion = () => {
     console.log(data);
   }
   return (
-    (<div className="px-2 py-5 w-8/12 space-y-5 mt-5 max-sm:px-0 max-sm:w-full max-sm:space-y-4 max-sm:mt-0">
+    (<div className="px-2 min-sm:py-5 w-8/12 space-y-5 mt-5 min-sm:mb-8 max-sm:px-0 max-sm:w-full max-sm:space-y-4 max-sm:mt-0">
       <h3 className="text-2xl font-bold max-sm:text-xl">Comprehensive Course Modules</h3>
       <Accordion type="single" collapsible className="-space-y-px w-12/12" defaultValue="3">
         {modules.map((module) => (
