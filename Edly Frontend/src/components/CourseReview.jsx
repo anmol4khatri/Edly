@@ -98,7 +98,7 @@ export default function Component() {
   return (
     <>
       {/* Desktop Masonry Grid */}
-      <div className="hidden md:block px-2 py-6 w-8/12">
+      <div className="hidden md:block px-2 py-6 w-8/12 mb-10">
       {/* Header */}
           <div className="mb-4 max-sm:hidden">
                 <h1 className="text-2xl font-bold text-white mb-2">Recent Reviews</h1>

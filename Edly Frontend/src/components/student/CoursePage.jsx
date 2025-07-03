@@ -8,11 +8,24 @@ import CourseRating from "../CourseRating";
 
 const CoursePage = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
+	const [scrollLimitReached, setScrollLimitReached] = useState(false);
 
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
-			setIsScrolled(scrollTop > 50); // scroll threshold
+			const windowHeight = window.innerHeight;
+			const documentHeight = document.documentElement.scrollHeight;
+
+			// Calculate the limit: stop when 30px from bottom
+			const scrollLimit = documentHeight - windowHeight - 250;
+
+			if (scrollTop >= scrollLimit) {
+				setScrollLimitReached(true);
+				// Keep banner in original position when limit is reached
+			} else {
+				setScrollLimitReached(false);
+				setIsScrolled(scrollTop > 50);
+			}
 		};
 
 		window.addEventListener('scroll', handleScroll);
@@ -46,8 +59,18 @@ const CoursePage = () => {
 				</div>
 
 				{/* Banner with dynamic positioning based on scroll */}
-				<div className={`fixed right-15 z-10 w-96 transition-all duration-300 ease-in-out ${isScrolled ? 'top-9' : 'top-28'
-					}`}>
+				<div
+					className={`fixed right-15 z-10 w-96 transform ${scrollLimitReached
+							? 'opacity-0 translate-y-4 translate-x-4 scale-95 pointer-events-none'
+							: isScrolled
+								? 'top-9 opacity-100 translate-y-0 translate-x-0 scale-100'
+								: 'top-28 opacity-100 translate-y-0 translate-x-0 scale-100'
+						}`}
+					style={{
+						transition: 'all 0.5s ease-in-out',
+						willChange: 'transform, opacity' // Optimize for animations
+					}}
+				>
 					<CourseBanner />
 				</div>
 			</div>
@@ -55,4 +78,4 @@ const CoursePage = () => {
 	)
 }
 
-export default CoursePage
+export default CoursePage;
