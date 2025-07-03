@@ -111,7 +111,7 @@ export function CreateAccountForm({ className, ...props }) {
       </div>
       <div className="text-center text-sm">
         Have an account?{" "}
-        <a href="#" className="underline underline-offset-4">
+        <a href={props.role === "educator" ? "/educator/login" : "/student/login" } className="underline underline-offset-4">
           Login
         </a>
       </div>
