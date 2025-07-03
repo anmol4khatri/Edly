@@ -19,7 +19,7 @@ const Timeline = ({ step = 1 }) => {
   ]
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-card">
+    <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="flex flex-col px-32 py-20">
         {timelineItems.map((item, index) => {
           const isCompleted = step > item.id

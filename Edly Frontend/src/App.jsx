@@ -7,6 +7,7 @@ import SignupEducator from "./components/eduator/SignupEducator";
 import LoginEducator from "./components/eduator/LoginEducator";
 import LoginStudent from "./components/student/LoginStudent";
 import SignupStudent from "./components/student/SignupEducator";
+import OnboardingPage from "./components/eduator/OnboardingPage";
 
 const App = () => {
 	return (
@@ -18,6 +19,7 @@ const App = () => {
 					<Route path="/course" element={<CoursePage />} />
 				</Route>
 				<Route path="/educator/signup" element={<SignupEducator />} />
+				<Route path="/educator/onboarding" element={<OnboardingPage />} />
 				<Route path="/educator/login" element={<LoginEducator />} />
 				<Route path="/student/signup" element={<SignupStudent />} />
 				<Route path="/student/login" element={<LoginStudent />} />
