@@ -58,7 +58,7 @@ const Footer = ({
   return (
     <section className="">
       <div className="">
-        <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left pl-16">
+        <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left pl-16 max-sm:px-7">
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
             {/* Logo */}
             <div className="flex items-center gap-2 lg:justify-start">
@@ -102,7 +102,7 @@ const Footer = ({
             ))}
           </div>
         </div>
-        <div className="text-muted-foreground mt-8 flex flex-col justify-between gap-4 border-t py-8 px-16 text-xs font-medium md:flex-row md:items-center md:text-left">
+        <div className="text-muted-foreground mt-8 flex flex-col justify-between gap-4 border-t py-8 px-16 text-xs font-medium md:flex-row md:items-center md:text-left max-sm:px-7">
           <p className="order-2 lg:order-1">{copyright}</p>
           <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
             {legalLinks.map((link, idx) => (
