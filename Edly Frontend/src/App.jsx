@@ -3,6 +3,7 @@ import Body from "./components/Body";
 import BrowseCourses from "./components/student/BrowseCourses";
 import EnrolledCourses from "./components/student/EnrolledCourses";
 import CoursePage from "./components/student/CoursePage";
+import SignupEducator from "./components/eduator/SignupEducator";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
 				<Route path="/enrolled" element={<EnrolledCourses />} />
 				<Route path="/course" element={<CoursePage />} />
 			</Route>
+			<Route path="/educator/signup" element={<SignupEducator />} />
 		</Routes>
 	</BrowserRouter>
   )
