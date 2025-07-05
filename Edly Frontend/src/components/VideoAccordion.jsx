@@ -158,11 +158,11 @@ const modules = [
 const getContentIcon = (type) => {
   switch (type) {
     case 'lesson':
-      return <Play className="w-4 h-4 text-blue-500" />
+      return <Play className="w-5 h-5 text-blue-500" />
     case 'pdf':
-      return <FileText className="w-4 h-4 text-red-500" />
+      return <FileText className="w-5 h-5 text-red-500" />
     case 'quiz':
-      return <HelpCircle className="w-4 h-4 text-green-500" />
+      return <HelpCircle className="w-5 h-5 text-green-500" />
     default:
       return null
   }
@@ -178,8 +178,7 @@ const CourseModulesAccordion = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center">Course Modules</h2>
+    <div className="max-w-4xl mx-auto">
       <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
         {modules.map((module, index) => (
           <AccordionItem
@@ -187,14 +186,14 @@ const CourseModulesAccordion = () => {
             value={`item-${index + 1}`}
             className="data-[state=open]:bg-card rounded-md border-none px-5 transition-colors duration-200"
           >
-            <AccordionTrigger>{module.title}</AccordionTrigger>
-            <AccordionContent className="text-muted-foreground">
+            <AccordionTrigger className="text-lg">{module.title}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground text-base">
               <div className="space-y-3 mt-4">
                 {module.content.map((item, contentIndex) => (
                   <div 
                     key={item.data._id} 
                     onClick={() => handleContentClick(item)}
-                    className={`flex items-center gap-3 p-3 rounded-lg transition-colors cursor-pointer ${
+                    className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                       currentPlayingVideo === item.data._id && item.type === 'lesson'
                         ? 'bg-white text-gray-900 shadow-sm' 
                         : 'hover:bg-white/10 text-foreground'
@@ -207,17 +206,17 @@ const CourseModulesAccordion = () => {
                       </h4>
                     </div>
                     {item.type === 'lesson' && (
-                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                      <span className="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded">
                         Video
                       </span>
                     )}
                     {item.type === 'pdf' && (
-                      <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">
+                      <span className="text-xs bg-red-200 text-red-800 px-2 py-1 rounded">
                         PDF
                       </span>
                     )}
                     {item.type === 'quiz' && (
-                      <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                      <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded">
                         Quiz
                       </span>
                     )}
