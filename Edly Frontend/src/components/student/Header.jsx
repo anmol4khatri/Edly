@@ -111,7 +111,7 @@ const Header = ()  => {
           </Popover>
           {/* Logo */}
           <a href="/" className="text-primary hover:text-primary/90 w-30">
-            <img src="edly.png" alt="logo"/>
+            <img src="/edly.png" alt="logo"/>
           </a>
         </div>
         {/* Right side */}

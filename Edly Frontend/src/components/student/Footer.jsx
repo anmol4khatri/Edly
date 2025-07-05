@@ -46,7 +46,7 @@ const defaultLegalLinks = [
 const Footer = ({
   logo = {
     url: "/",
-    src: "edly.png",
+    src: "/edly.png",
     alt: "logo",
   },
   sections = defaultSections,

@@ -1,13 +1,6 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Video } from 'lucide-react';
-import { NotebookPen } from 'lucide-react';
-import { Key } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Play, FileText, HelpCircle } from 'lucide-react'
+import { useState } from 'react'
 
 const modules = [
   {
@@ -162,49 +155,81 @@ const modules = [
   }
 ]
 
-const CourseAccordion = () => {
-  const handleItemClick = (data) => {
-    console.log(data);
+const getContentIcon = (type) => {
+  switch (type) {
+    case 'lesson':
+      return <Play className="w-4 h-4 text-blue-500" />
+    case 'pdf':
+      return <FileText className="w-4 h-4 text-red-500" />
+    case 'quiz':
+      return <HelpCircle className="w-4 h-4 text-green-500" />
+    default:
+      return null
   }
+}
+
+const CourseModulesAccordion = () => {
+  const [currentPlayingVideo, setCurrentPlayingVideo] = useState(null)
+
+  const handleContentClick = (item) => {
+    if (item.type === 'lesson') {
+      setCurrentPlayingVideo(item.data._id)
+    }
+  }
+
   return (
-    (<div className="px-2 min-sm:py-5 w-8/12 space-y-5 mt-5 min-sm:mb-8 max-sm:px-0 max-sm:w-full max-sm:space-y-4 max-sm:mt-0">
-      <h3 className="text-2xl font-bold max-sm:text-xl">Comprehensive Course Modules</h3>
-      <Accordion type="single" collapsible className="-space-y-px w-12/12" defaultValue="3">
-        {modules.map((module) => (
+    <div className="max-w-4xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-6 text-center">Course Modules</h2>
+      <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
+        {modules.map((module, index) => (
           <AccordionItem
-            value={module._id}
             key={module._id}
-            className="bg-card has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative border px-4 py-1 outline-none first:rounded-t-md last:rounded-b-md last:border-b has-focus-visible:z-10 has-focus-visible:ring-[3px]">
-            <AccordionTrigger
-              className="py-4 text-md leading-6 hover:no-underline focus-visible:ring-0 cursor-pointer">
-              {module.title}
-            </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground bg-[#2B2F37] p-5 m-2 rounded">
-              {module.content.map(item => (
-                <div key={item.data._id} className="flex gap-3 p-1.5 w-full" onClick={() => handleItemClick(item.data)}>
-                  <span className="text-primary">
-                    {item.type === "lesson" ? <Play className="w-5 h-5 text-blue-500" /> :
-                      item.type === "pdf" ? <FileText className="w-5 h-5 text-red-500" /> :
-                        <HelpCircle className="w-5 h-5 text-green-500" />}
-                  </span>
-                  {/* Content - Desktop View */}
-                  <span className="max-sm:hidden text-[16px] text-[#a3a4a6] w-full cursor-pointer flex justify-between">
-                    <span className="hover:text-white">{item.data.title}</span>
-                    <span className="">2 hours</span>
-                  </span>
-                  {/* Content - Mobile View */}
-                  <span className="min-sm:hidden text-[16px] text-[#a3a4a6] w-full cursor-pointer">
-                    <span className="hover:text-white">{item.data.title}</span>
-                    <span className=""> | 2 hrs</span>
-                  </span>
-                </div>
-              ))}
+            value={`item-${index + 1}`}
+            className="data-[state=open]:bg-card rounded-md border-none px-5 transition-colors duration-200"
+          >
+            <AccordionTrigger>{module.title}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground">
+              <div className="space-y-3 mt-4">
+                {module.content.map((item, contentIndex) => (
+                  <div 
+                    key={item.data._id} 
+                    onClick={() => handleContentClick(item)}
+                    className={`flex items-center gap-3 p-3 rounded-lg transition-colors cursor-pointer ${
+                      currentPlayingVideo === item.data._id && item.type === 'lesson'
+                        ? 'bg-white text-gray-900 shadow-sm' 
+                        : 'hover:bg-white/10 text-foreground'
+                    }`}
+                  >
+                    {getContentIcon(item.type)}
+                    <div className="flex-1">
+                      <h4 className="font-medium">
+                        {item.data.title}
+                      </h4>
+                    </div>
+                    {item.type === 'lesson' && (
+                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                        Video
+                      </span>
+                    )}
+                    {item.type === 'pdf' && (
+                      <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">
+                        PDF
+                      </span>
+                    )}
+                    {item.type === 'quiz' && (
+                      <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                        Quiz
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>
-    </div>)
-  );
+    </div>
+  )
 }
 
-export default CourseAccordion;
+export default CourseModulesAccordion
