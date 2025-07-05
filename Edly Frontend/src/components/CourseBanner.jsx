@@ -1,21 +1,21 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { IndianRupee } from 'lucide-react';
-import { Clock9 } from 'lucide-react';
-import { FolderKey } from 'lucide-react';
+import { Clock } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
 import { Download } from 'lucide-react';
-import { ChartLine } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
 import { Infinity } from 'lucide-react';
-import { Trophy } from 'lucide-react';
+import { Award } from 'lucide-react';
 
 const CourseBanner = () => {
 	const courseFeatures = [
-		{ icon: Clock9, text: "19 hours high quality content" },
-		{ icon: FolderKey, text: "More than 18 Quizes" },
+		{ icon: Clock, text: "19 hours high quality content" },
+		{ icon: HelpCircle, text: "More than 18 Quizes" },
 		{ icon: Download, text: "13 downloadable resources" },
-		{ icon: ChartLine, text: "Industry grade project" },
+		{ icon: Briefcase, text: "Industry grade project" },
 		{ icon: Infinity, text: "Life time access" },
-		{ icon: Trophy, text: "Certificate of completion" }
+		{ icon: Award, text: "Certificate of completion" }
 	];
 
 	return (
@@ -42,13 +42,13 @@ const CourseBanner = () => {
 				</CardHeader>
 				<CardFooter className='max-sm:flex-col max-sm:items-stretch'>
 					<div>
-						<h1 className='text-2xl font-bold pt-5 pb-3'>This course includes:</h1>
+						<h1 className='text-xl font-bold pt-5 pb-3'>This course includes:</h1>
 						<div className="flex gap-2 text-lg pb-2">
-							<Clock9 className="p-0.5 text-primary" />
+							<Clock className="p-0.5 text-primary" />
 							<p className='text-[#a3a4a6]'>19 hours high quality content</p>
 						</div>
 						<div className="flex gap-2 text-lg  pb-2">
-							<FolderKey className="p-0.5 text-primary" />
+							<HelpCircle className="p-0.5 text-primary" />
 							<p  className='text-[#a3a4a6]'>More than 18 Quizes</p>
 						</div>
 						<div className="flex gap-2 text-lg pb-2">
@@ -56,7 +56,7 @@ const CourseBanner = () => {
 							<p  className='text-[#a3a4a6]'>13 downloadable resources</p>
 						</div>
 						<div className="flex gap-2 text-lg pb-2">
-							<ChartLine className="p-0.5 text-primary" />
+							<Briefcase className="p-0.5 text-primary" />
 							<p  className='text-[#a3a4a6]'>Industry grade project</p>
 						</div>
 						<div className="flex gap-2 text-lg pb-2">
@@ -64,7 +64,7 @@ const CourseBanner = () => {
 							<p  className='text-[#a3a4a6]'>Life time access</p>
 						</div>
 						<div className="flex gap-2 text-lg pb-2">
-							<Trophy className="p-0.5 text-primary" />
+							<Award className="p-0.5 text-primary" />
 							<p  className='text-[#a3a4a6]'>Certificate of completion</p>
 						</div>
 					</div>
@@ -88,7 +88,7 @@ const CourseBanner = () => {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
 						{courseFeatures.map((feature, index) => (
 							<div key={index} className="flex items-center gap-3 text-sm md:text-base">
-								<feature.icon className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
+								<feature.icon className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 text-primary" />
 								<span className="text-muted-foreground">{feature.text}</span>
 							</div>
 						))}
