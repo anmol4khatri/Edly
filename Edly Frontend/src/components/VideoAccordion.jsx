@@ -193,7 +193,7 @@ const CourseModulesAccordion = () => {
                   <div 
                     key={item.data._id} 
                     onClick={() => handleContentClick(item)}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+                    className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer max-sm:text-base ${
                       currentPlayingVideo === item.data._id && item.type === 'lesson'
                         ? 'bg-white text-gray-900 shadow-sm' 
                         : 'hover:bg-white/10 text-foreground'
