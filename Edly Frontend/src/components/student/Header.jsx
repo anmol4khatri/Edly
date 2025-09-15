@@ -34,7 +34,7 @@ const navigationLinks = [
 
 const Header = ()  => {
   return (
-    (<header className="border-b px-4 py-2 md:px-6">
+    (<header className="border-b px-4 py-2 md:px-6 2xl:px-50">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">

@@ -54,8 +54,8 @@ export default function CustomerReviews() {
                 <h1 className="text-3xl font-bold text-white mb-2">Course Reviews</h1>
                 <p className="text-slate-400">What our students are saying</p>
             </div>
-            <div className="max-w-4xl">
-                <Card className="max-sm:bg-transparent max-sm:border-none ">
+            <div className="max-w-4xl 2xl:max-w-5xl">
+                <Card className="max-sm:bg-transparent max-sm:border-none">
                     <CardContent className="p-4 text-center">
                         {/* Header Mobile*/}
                         <div className="mb-4 min-sm:hidden">

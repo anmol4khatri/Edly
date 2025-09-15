@@ -49,7 +49,7 @@ const CoursePage = () => {
 			</div>
 
 			{/* Desktop Layout - Original Structure */}
-			<div className="hidden lg:block px-16 py-3 relative">
+			<div className="hidden lg:block px-16 py-3 relative 2xl:px-50">
 				<div className="w-full">
 					<CourseHero />
 					<CourseHighlights />
@@ -60,10 +60,10 @@ const CoursePage = () => {
 
 				{/* Banner with dynamic positioning based on scroll */}
 				<div
-					className={`fixed right-15 z-10 w-96 transform ${scrollLimitReached
+					className={`fixed right-15 z-10 w-96 transform 2xl:mr-35 ${scrollLimitReached
 							? 'opacity-0 translate-y-4 translate-x-4 scale-95 pointer-events-none'
 							: isScrolled
-								? 'top-9 opacity-100 translate-y-0 translate-x-0 scale-100'
+								? 'top-9 opacity-100 translate-y-0 translate-x-0 scale-100 2xl:mt-20'
 								: 'top-28 opacity-100 translate-y-0 translate-x-0 scale-100'
 						}`}
 					style={{

@@ -52,29 +52,29 @@ const CourseHighlights = () => {
                 <h3 className="text-3xl py-5 font-semibold">What you'll learn</h3>
                 <div className="flex gap-10 w-8/12 bg-card p-5 rounded">
                     <span className='flex flex-col gap-10'>
-                        <span className="flex gap-5 w-96 items-start h-32">
+                        <span className="flex gap-5 w-96 items-start h-32 2xl:w-md">
                             <CircleCheckBig className="size-7 mt-0.5 flex-shrink-0 text-primary" />
                             <p className="text-md leading-relaxed">Master Docker and Kubernetes for containerization and orchestration from basics to advanced Master Docker and Kubernetes for containerization and orchestration from basics to advanced.</p>
                         </span>
-                        <span className="flex gap-5 w-96 items-start h-32">
+                        <span className="flex gap-5 w-96 items-start h-32 2xl:w-md">
                             <CircleCheckBig className="size-7 mt-0.5 flex-shrink-0 text-primary" />
                             <p className="text-md leading-relaxed">Master Docker and Kubernetes for containerization and orchestration from basics to advanced Master Docker and Kubernetes for containerization and orchestration from basics to advanced.</p>
                         </span>
-                        <span className="flex gap-5 w-96 items-start h-32">
+                        <span className="flex gap-5 w-96 items-start h-32 2xl:w-md">
                             <CircleCheckBig className="size-7 mt-0.5 flex-shrink-0 text-primary" />
                             <p className="text-md leading-relaxed">Master Docker and Kubernetes for containerization and orchestration from basics to advanced Master Docker and Kubernetes for containerization and orchestration from basics to advanced.</p>
                         </span>
                     </span>
                     <span className='flex flex-col gap-10'>
-                        <span className="flex gap-5 w-96 items-start h-32">
+                        <span className="flex gap-5 w-96 items-start h-32 2xl:w-md">
                             <CircleCheckBig className="size-7 mt-0.5 flex-shrink-0 text-primary" />
                             <p className="text-md leading-relaxed">Master Docker and Kubernetes for containerization and orchestration from basics to advanced Master Docker and Kubernetes for containerization and orchestration from basics to advanced.</p>
                         </span>
-                        <span className="flex gap-5 w-96 items-start h-32">
+                        <span className="flex gap-5 w-96 items-start h-32 2xl:w-md">
                             <CircleCheckBig className="size-7 mt-0.5 flex-shrink-0 text-primary" />
                             <p className="text-md leading-relaxed">Master Docker and Kubernetes for containerization and orchestration from basics to advanced Master Docker and Kubernetes for containerization and orchestration from basics to advanced.</p>
                         </span>
-                        <span className="flex gap-5 w-96 items-start h-32">
+                        <span className="flex gap-5 w-96 items-start h-32 2xl:w-md">
                             <CircleCheckBig className="size-7 mt-0.5 flex-shrink-0 text-primary" />
                             <p className="text-md leading-relaxed">Master Docker and Kubernetes for containerization and orchestration from basics to advanced Master Docker and Kubernetes for containerization and orchestration from basics to advanced.</p>
                         </span>
