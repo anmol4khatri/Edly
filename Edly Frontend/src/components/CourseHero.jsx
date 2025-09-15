@@ -48,10 +48,10 @@ const CourseHero = () => {
             <div className="hidden lg:block">
                 <Card className="h-60">
                     <CardHeader>
-                        <CardTitle className="text-4xl w-6/10 font-extrabold pb-5">Docker and Kubernetes for beginners | DevOps journey</CardTitle>
+                        <CardTitle className="text-4xl w-6/10 font-extrabold pb-2">Docker and Kubernetes for beginners | DevOps journey</CardTitle>
                         <CardDescription className="text-xl w-6/10 ">Docker & Kubernetes Masterclass: Build, Deploy, & Scale on AWS, Azure, & GCP.</CardDescription>
                     </CardHeader>
-                    <CardFooter className="flex gap-5">
+                    <CardFooter className="flex gap-5 -mt-2">
                         <RatingDisplay rating={4.8} />
                         <span className='text-muted-foreground text-xl'> | </span>
                         <span className="flex gap-2">
