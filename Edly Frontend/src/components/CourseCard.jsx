@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from '@/components/ui/card'
 import { IndianRupee } from 'lucide-react';
+import {useNavigate} from 'react-router-dom'; 
 
 const CourseCard = ({ price }) => {
+	const navigate = useNavigate();
 
 	const footerClasses = price
 		? 'gap-3 justify-between max-sm:flex max-sm:items-stretch px-3'
@@ -28,7 +30,7 @@ const CourseCard = ({ price }) => {
 						{price}
 					</span>
 				)}
-				<Button>View Course</Button>
+				<Button onClick={() => navigate('/course')}>View Course</Button>
 			</CardFooter>
 		</Card>
 	)

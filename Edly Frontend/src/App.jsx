@@ -19,14 +19,18 @@ const App = () => {
 					<Route path="/browse" element={<BrowseCourses />} />
 					<Route path="/enrolled" element={<EnrolledCourses />} />
 					<Route path="/course" element={<CoursePage />} />
-					<Route path="/student/continue_watching" element={<ContinueWatching />} />
+					<Route path="/continue_watching" element={<ContinueWatching />} />
 				</Route>
-				<Route path="/educator/signup" element={<SignupEducator />} />
-				<Route path="/educator/onboarding" element={<OnboardingPage />} />
-				<Route path="/educator/login" element={<LoginEducator />} />
-				<Route path="/student/signup" element={<SignupStudent />} />
-				<Route path="/student/login" element={<LoginStudent />} />
-				<Route path="/student/quiz/:quizId" element={<QuizPage />} />
+				
+				{/* Admin / Educator */}
+				<Route path="/admin/signup" element={<SignupEducator />} />
+				<Route path="/admin/onboarding" element={<OnboardingPage />} />
+				<Route path="/admin/login" element={<LoginEducator />} />
+				
+				{/* Student */}
+				<Route path="/signup" element={<SignupStudent />} />
+				<Route path="/login" element={<LoginStudent />} />
+				<Route path="/quiz/:quizId" element={<QuizPage />} />
 			</Routes>
 		</BrowserRouter>
 	)
