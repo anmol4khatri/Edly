@@ -48,7 +48,7 @@ export default function CustomerReviews() {
     ]
 
     return (
-        <div className="w-8/12 px-2 max-sm:w-full max-sm:px-0 min-sm:mb-2">
+        <div className="w-8/12 px-0 max-sm:w-full max-sm:px-0 min-sm:mb-2">
             {/* Header*/}
             <div className="mb-4 max-sm:hidden">
                 <h1 className="text-3xl font-bold text-white mb-2">Course Reviews</h1>

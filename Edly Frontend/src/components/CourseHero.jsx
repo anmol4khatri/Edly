@@ -51,7 +51,7 @@ const CourseHero = () => {
                         <CardTitle className="text-4xl w-6/10 font-extrabold pb-2 2xl:pb-4">Docker and Kubernetes for beginners | DevOps journey</CardTitle>
                         <CardDescription className="text-xl w-6/10 2xl:pb-5">Docker & Kubernetes Masterclass: Build, Deploy, & Scale on AWS, Azure, & GCP.</CardDescription>
                     </CardHeader>
-                    <CardFooter className="flex gap-5 -mt-2">
+                    <CardFooter className="flex gap-5 mt-6 2xl:-mt-6">
                         <RatingDisplay rating={4.8} />
                         <span className='text-muted-foreground text-xl'> | </span>
                         <span className="flex gap-2">
