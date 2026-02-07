@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
 
-    educatorId: {
+    tenantId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Educator',
+        ref: 'Tenant',
         required: true,
+        index: true
     },
     title: {
         type: String,

@@ -5,33 +5,47 @@ const cookieParser = require("cookie-parser");
 const app = express();
 
 const connectDb = require("./config/database");
-const authEducatorRoutes = require("./routes/authEducatorRoutes");
-const onBoardingRoutes = require("./routes/onBoardingRoutes");
-const educatorCourseRoutes = require("./routes/courceManagementRoutes");
-const authStudentRoutes = require("./routes/authStudentRoutes");
-const studentPortalRoutes = require("./routes/studentPortalRoutes");
+
+// Routes
+const authRoutes = require("./routes/authRoutes");
+const tenantRoutes = require("./routes/tenantRoutes");
+const courseRoutes = require("./routes/courseRoutes");
+const enrollmentRoutes = require("./routes/enrollmentRoutes");
+
+// Middlewares
+const resolveTenant = require("./middlewares/resolveTenant");
 
 dotenv.config();
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    http: true
-}))
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
 
-app.use("/", authEducatorRoutes);
-app.use("/", onBoardingRoutes);
-app.use("/", educatorCourseRoutes);
-app.use("/", authStudentRoutes);
-app.use("/", studentPortalRoutes);
+// Apply Tenant Resolution Globally
+app.use(resolveTenant);
+
+
+// API Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/tenant", tenantRoutes);
+app.use("/api/courses", courseRoutes);
+app.use("/api/enrollments", enrollmentRoutes);
+
+// Health check
+app.get("/health", (req, res) => res.json({ status: "ok", tenant: req.tenant?.subdomain }));
 
 connectDb()
     .then(() => {
         console.log("Connected to the Database");
-        app.listen(process.env.PORT, () => {
-            console.log("Server is running at PORT: " + process.env.PORT);
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => {
+            console.log("Server is running at PORT: " + port);
         });
     })
-    .catch(() => {
-        console.error("Something went wrong while connecting to the database");
+    .catch((err) => {
+        console.error("Something went wrong while connecting to the database", err);
     })
-
