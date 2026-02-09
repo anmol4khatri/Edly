@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
 
 const enrollmentSchema = new mongoose.Schema({
-  studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
+  studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
-  educatorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Educator', required: true },
+  tenantId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Tenant",
+    required: true
+  },
   enrolledAt: { type: Date, default: Date.now },
   paymentId: String,
 });

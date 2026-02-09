@@ -1,0 +1,436 @@
+{
+    "info": {
+        "_postman_id": "edly-backend-collection",
+        "name": "Edly Backend",
+        "description": "API Collection for Edly Backend. Includes Authentication, Course Management, and Enrollment flows.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"john@demo.com\",\n    \"password\": \"password123\",\n    \"confirmPassword\": \"password123\",\n    \"role\": \"student\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "register"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "// Automatically save token to variable",
+                                    "var jsonData = pm.response.json();",
+                                    "if (jsonData.message === \"Login successful\" || jsonData.user) {",
+                                    "    // Token is in httpOnly cookie, but if returned in body we could save it.",
+                                    "    // Since API sets cookie, Postman cookie manager handles it.",
+                                    "    // If you need manual token handling, adjust here.",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"student1@demo.com\",\n    \"password\": \"student123\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/auth/logout",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "logout"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Tenant",
+            "item": [
+                {
+                    "name": "Get Tenant Settings",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/tenant/settings",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "tenant",
+                                "settings"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Tenant Settings (Admin/Educator)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Updated School Name\",\n    \"bio\": \"New bio description\",\n    \"primaryColor\": \"#000000\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/tenant/settings",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "tenant",
+                                "settings"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Courses",
+            "item": [
+                {
+                    "name": "Get All Courses",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/courses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "courses"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Course By ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/courses/:courseId",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "courses",
+                                ":courseId"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "courseId",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Course (Educator)",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"New React Course\",\n    \"description\": \"Learn React from scratch\",\n    \"thumbnail\": \"https://via.placeholder.com/300\",\n    \"price\": 29.99,\n    \"aboutCourse\": [\"Section 1\", \"Section 2\"],\n    \"highlights\": [\"Highlight 1\", \"Highlight 2\"]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/courses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "courses"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Modules & Content",
+            "item": [
+                {
+                    "name": "Get Modules By Course",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/courses/:courseId/modules",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "courses",
+                                ":courseId",
+                                "modules"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "courseId",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Module",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Getting Started\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/courses/:courseId/modules",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "courses",
+                                ":courseId",
+                                "modules"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "courseId",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add Lesson Content",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"type\": \"lesson\",\n    \"title\": \"Intro Video\",\n    \"videoUrl\": \"https://example.com/video.mp4\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/courses/:courseId/modules/:moduleId/content",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "courses",
+                                ":courseId",
+                                "modules",
+                                ":moduleId",
+                                "content"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "courseId",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "moduleId",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Enrollment",
+            "item": [
+                {
+                    "name": "Enroll in Course",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"courseId\": \"REPLACE_WITH_COURSE_ID\",\n    \"paymentId\": \"TEST_PAYMENT_123\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/enrollments/enroll",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "enrollments",
+                                "enroll"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "My Enrollments",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/enrollments/my-courses",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "enrollments",
+                                "my-courses"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "apikey",
+        "apikey": [
+            {
+                "key": "value",
+                "value": "",
+                "type": "string"
+            },
+            {
+                "key": "key",
+                "value": "token",
+                "type": "string"
+            },
+            {
+                "key": "in",
+                "value": "cookie",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    "// Automatically add Host header for tenant resolution",
+                    "pm.request.headers.add({",
+                    "    key: 'Host',",
+                    "    value: pm.environment.get('tenant_host') || 'demo-school.localhost:7777'",
+                    "});"
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:7777/api",
+            "type": "string"
+        },
+        {
+            "key": "tenant_host",
+            "value": "demo-school.localhost:7777",
+            "type": "string"
+        }
+    ]
+}
