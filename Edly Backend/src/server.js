@@ -1,27 +1,42 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const cookieParser = require("cookie-parser");
-const rateLimit = require("express-rate-limit");
-const helmet = require("helmet");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 
-const connectDb = require("./config/database");
-const errorHandler = require("./middlewares/errorMiddleware");
+import connectDb from "#config/database.js";
+import errorHandler from "#middlewares/errorMiddleware.js";
 
 // Routes
-const authRoutes = require("./routes/authRoutes");
-const tenantRoutes = require("./routes/tenantRoutes");
-const courseRoutes = require("./routes/courseRoutes");
-const enrollmentRoutes = require("./routes/enrollmentRoutes");
+import authRoutes from "#routes/authRoutes.js";
+import tenantRoutes from "#routes/tenantRoutes.js";
+import courseRoutes from "#routes/courseRoutes.js";
+import enrollmentRoutes from "#routes/enrollmentRoutes.js";
 
 // Middlewares
-const resolveTenant = require("./middlewares/resolveTenant");
+import resolveTenant from "#middlewares/resolveTenant.js";
 
 dotenv.config();
 const app = express();
 
 // Security Headers
 app.use(helmet());
+
+// Temp Logger
+app.use((req, res, next) => {
+    const start = Date.now();
+    console.log(`[${new Date().toISOString()}] Incoming request: ${req.method} ${req.originalUrl || req.url}`);
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        const status = res.statusCode;
+        const color = status >= 400 ? '\x1b[31m' : '\x1b[32m'; // Red for error, Green for success
+        const reset = '\x1b[0m';
+
+        console.log(`${color}[${new Date().toISOString()}] ${req.method} ${req.originalUrl || req.url} ${status} - ${duration}ms${reset}`);
+    });
+    next();
+});
 
 // Rate Limiting
 const limiter = rateLimit({
@@ -41,6 +56,8 @@ app.use(cors({
 
 // Apply Tenant Resolution Globally
 app.use(resolveTenant);
+
+
 
 
 // API Routes

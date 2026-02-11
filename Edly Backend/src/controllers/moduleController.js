@@ -1,8 +1,8 @@
-const Module = require("../models/Module");
-const Course = require("../models/Course");
-const Lesson = require("../models/Lesson");
-const Pdf = require("../models/Pdf");
-const Quiz = require("../models/Quiz");
+import Module from "#models/Module.js";
+import Course from "#models/Course.js";
+import Lesson from "#models/Lesson.js";
+import Pdf from "#models/Pdf.js";
+import Quiz from "#models/Quiz.js";
 
 // Helper to verify module ownership
 const verifyModuleOwnership = async (moduleId, tenantId) => {
@@ -17,7 +17,7 @@ const verifyModuleOwnership = async (moduleId, tenantId) => {
 };
 
 // Create Module
-const createModule = async (req, res) => {
+export const createModule = async (req, res) => {
 	const { courseId } = req.params;
 	const { title, content } = req.body;
 
@@ -58,7 +58,7 @@ const createModule = async (req, res) => {
 };
 
 // Get Modules
-const getAllModulesByCourse = async (req, res) => {
+export const getAllModulesByCourse = async (req, res) => {
 	const { courseId } = req.params;
 	try {
 		// Optional: check if course exists in tenant
@@ -86,7 +86,7 @@ const getAllModulesByCourse = async (req, res) => {
 };
 
 // Delete Module
-const deleteModule = async (req, res) => {
+export const deleteModule = async (req, res) => {
 	const { moduleId, courseId } = req.params;
 	try {
 		// IDOR Fix: Verify course belongs to tenant
@@ -113,7 +113,7 @@ const deleteModule = async (req, res) => {
 };
 
 // Add Content to Module
-const addContent = async (req, res) => {
+export const addContent = async (req, res) => {
 	const { moduleId, courseId } = req.params;
 	const { content } = req.body;
 
@@ -150,7 +150,7 @@ const addContent = async (req, res) => {
 };
 
 // Delete Content
-const deleteContent = async (req, res) => {
+export const deleteContent = async (req, res) => {
 	const { moduleId, type, refId } = req.params;
 	try {
 		// IDOR Fix: Verify Module and Tenant Ownership
@@ -176,12 +176,4 @@ const deleteContent = async (req, res) => {
 	} catch (err) {
 		res.status(500).json({ error: err.message });
 	}
-};
-
-module.exports = {
-	createModule,
-	getAllModulesByCourse,
-	deleteModule,
-	addContent,
-	deleteContent
 };

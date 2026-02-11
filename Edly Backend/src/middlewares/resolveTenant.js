@@ -1,4 +1,4 @@
-const Tenant = require("../models/Tenant");
+import Tenant from "#models/Tenant.js";
 
 // Simple in-memory cache for tenant resolution
 const tenantCache = new Map();
@@ -69,4 +69,4 @@ const resolveTenant = async (req, res, next) => {
     }
 };
 
-module.exports = resolveTenant;
+export default resolveTenant;

@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const authController = require("../controllers/authController");
-const resolveTenant = require("../middlewares/resolveTenant");
+import * as authController from "#controllers/authController.js";
+import resolveTenant from "#middlewares/resolveTenant.js";
 
 // Apply tenant resolution to all auth routes
 router.use(resolveTenant);
@@ -10,4 +10,4 @@ router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.post("/logout", authController.logout);
 
-module.exports = router;
+export default router;

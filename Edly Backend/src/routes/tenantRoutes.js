@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const tenantController = require("../controllers/tenantController");
-const requireAuth = require("../middlewares/requireAuth");
+import * as tenantController from "#controllers/tenantController.js";
+import requireAuth from "#middlewares/requireAuth.js";
 
 // Public
 router.get("/settings", tenantController.getTenantDetails);
@@ -9,4 +9,4 @@ router.get("/settings", tenantController.getTenantDetails);
 // Protected
 router.put("/settings", requireAuth, tenantController.updateTenantSettings);
 
-module.exports = router;
+export default router;

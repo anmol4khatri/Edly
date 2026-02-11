@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const tenantSchema = new mongoose.Schema({
     subdomain: {
@@ -30,4 +30,4 @@ const tenantSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 const Tenant = mongoose.model('Tenant', tenantSchema);
-module.exports = Tenant;
+export default Tenant;

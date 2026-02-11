@@ -1,10 +1,10 @@
-const validator = require("validator");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import validator from "validator";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "#models/User.js";
 
 // Sign up
-const register = async (req, res) => {
+export const register = async (req, res) => {
     const tenantId = req.tenant._id;
     const { firstName, lastName, email, password, confirmPassword, role } = req.body; // Added role support (optional)
 
@@ -62,7 +62,7 @@ const register = async (req, res) => {
 };
 
 // Login
-const login = async (req, res) => {
+export const login = async (req, res) => {
     const tenantId = req.tenant._id;
     const { email, password } = req.body;
 
@@ -111,17 +111,11 @@ const login = async (req, res) => {
 };
 
 // Logout
-const logout = (req, res) => {
+export const logout = (req, res) => {
     try {
         res.clearCookie("token");
         res.status(200).json({ message: "Logged out successfully" });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-};
-
-module.exports = {
-    register,
-    login,
-    logout
 };
