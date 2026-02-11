@@ -18,6 +18,7 @@ const createCourse = async (req, res) => {
             price,
             aboutCourse,
             highlights,
+            // Future compatibility: createdBy: req.user._id
         });
 
         await course.save();
@@ -48,14 +49,29 @@ const updateCourse = async (req, res) => {
     }
 };
 
-// Get All Courses (Public, but scoped to Tenant)
+// Get All Courses (Public, but scoped to Tenant) with Pagination
 const getAllCourses = async (req, res) => {
     try {
-        const courses = await Course.find({ tenantId: req.tenant._id })
-            .select('title description thumbnail price'); // Lightweight for list
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
 
-        // If user is logged in, we COULD check enrollment status here, but better separate.
-        res.status(200).json({ courses });
+        const courses = await Course.find({ tenantId: req.tenant._id })
+            .select('title description thumbnail price') // Lightweight for list
+            .skip(skip)
+            .limit(limit);
+
+        const total = await Course.countDocuments({ tenantId: req.tenant._id });
+
+        res.status(200).json({
+            courses,
+            pagination: {
+                total,
+                page,
+                limit,
+                pages: Math.ceil(total / limit)
+            }
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -69,9 +85,6 @@ const getCourseById = async (req, res) => {
             .populate("modules");
 
         if (!course) return res.status(404).json({ error: "Course not found" });
-
-        // If user is student, we might want to mask content if not enrolled?
-        // For now returning full course info (excluding video links if needed)
 
         let isEnrolled = false;
         if (req.user) {
