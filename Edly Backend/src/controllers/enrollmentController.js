@@ -1,12 +1,12 @@
-const Enrollment = require("../models/Enrollment");
-const Course = require("../models/Course");
-const Module = require('../models/Module');
-const Lesson = require('../models/Lesson');
-const Pdf = require('../models/Pdf');
-const Quiz = require('../models/Quiz');
+import Enrollment from "#models/Enrollment.js";
+import Course from "#models/Course.js";
+import Module from '#models/Module.js';
+import Lesson from '#models/Lesson.js';
+import Pdf from '#models/Pdf.js';
+import Quiz from '#models/Quiz.js';
 
 // Enroll in a course
-const enroll = async (req, res) => {
+export const enroll = async (req, res) => {
     const { courseId } = req.body;
     const studentId = req.user._id;
     const tenantId = req.tenant._id;
@@ -35,7 +35,7 @@ const enroll = async (req, res) => {
 };
 
 // Get My Enrollments
-const getMyEnrollments = async (req, res) => {
+export const getMyEnrollments = async (req, res) => {
     try {
         const enrollments = await Enrollment.find({
             studentId: req.user._id,
@@ -52,7 +52,7 @@ const getMyEnrollments = async (req, res) => {
 };
 
 // Get Enrolled Course Content (Full Access)
-const getEnrolledCourseContent = async (req, res) => {
+export const getEnrolledCourseContent = async (req, res) => {
     const { courseId } = req.params;
     const studentId = req.user._id;
     const tenantId = req.tenant._id;
@@ -92,10 +92,4 @@ const getEnrolledCourseContent = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-};
-
-module.exports = {
-    enroll,
-    getMyEnrollments,
-    getEnrolledCourseContent
 };

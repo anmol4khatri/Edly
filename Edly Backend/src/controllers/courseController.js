@@ -1,8 +1,8 @@
-const Course = require("../models/Course");
-const Enrollment = require("../models/Enrollment");
+import Course from "#models/Course.js";
+import Enrollment from "#models/Enrollment.js";
 
 // Create Course
-const createCourse = async (req, res) => {
+export const createCourse = async (req, res) => {
     if (req.user.role !== 'educator' && req.user.role !== 'admin') {
         return res.status(403).json({ error: "Only educators can create courses" });
     }
@@ -29,7 +29,7 @@ const createCourse = async (req, res) => {
 };
 
 // Update Course
-const updateCourse = async (req, res) => {
+export const updateCourse = async (req, res) => {
     if (req.user.role !== 'educator' && req.user.role !== 'admin') {
         return res.status(403).json({ error: "Unauthorized" });
     }
@@ -50,7 +50,7 @@ const updateCourse = async (req, res) => {
 };
 
 // Get All Courses (Public, but scoped to Tenant) with Pagination
-const getAllCourses = async (req, res) => {
+export const getAllCourses = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
@@ -78,7 +78,7 @@ const getAllCourses = async (req, res) => {
 };
 
 // Get Single Course (Public)
-const getCourseById = async (req, res) => {
+export const getCourseById = async (req, res) => {
     const { courseId } = req.params;
     try {
         const course = await Course.findOne({ _id: courseId, tenantId: req.tenant._id })
@@ -103,7 +103,7 @@ const getCourseById = async (req, res) => {
 };
 
 // Delete Course
-const deleteCourse = async (req, res) => {
+export const deleteCourse = async (req, res) => {
     if (req.user.role !== 'educator' && req.user.role !== 'admin') {
         return res.status(403).json({ error: "Unauthorized" });
     }
@@ -116,11 +116,3 @@ const deleteCourse = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-
-module.exports = {
-    createCourse,
-    updateCourse,
-    getAllCourses,
-    getCourseById,
-    deleteCourse
-}

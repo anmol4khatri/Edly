@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const courseController = require("../controllers/courseController");
-const moduleController = require("../controllers/moduleController");
-const requireAuth = require("../middlewares/requireAuth");
+import * as courseController from "#controllers/courseController.js";
+import * as moduleController from "#controllers/moduleController.js";
+import requireAuth from "#middlewares/requireAuth.js";
 
 // Courses
 router.get("/", courseController.getAllCourses); // Public listing
@@ -19,4 +19,4 @@ router.delete("/:courseId/modules/:moduleId", requireAuth, moduleController.dele
 router.post("/:courseId/modules/:moduleId/content", requireAuth, moduleController.addContent);
 router.delete("/:courseId/modules/:moduleId/content/:type/:refId", requireAuth, moduleController.deleteContent);
 
-module.exports = router;
+export default router;

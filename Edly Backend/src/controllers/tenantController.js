@@ -1,7 +1,7 @@
-const Tenant = require("../models/Tenant");
+import Tenant from "#models/Tenant.js";
 
 // Get Tenant Details (Public)
-const getTenantDetails = async (req, res) => {
+export const getTenantDetails = async (req, res) => {
     try {
         const tenant = await Tenant.findById(req.tenant._id).select('-ownerId');
         if (!tenant) return res.status(404).json({ error: "Tenant not found" });
@@ -12,7 +12,7 @@ const getTenantDetails = async (req, res) => {
 };
 
 // Update Tenant Settings (Protected: Educator/Admin)
-const updateTenantSettings = async (req, res) => {
+export const updateTenantSettings = async (req, res) => {
     // Ensure user is authorized to update tenant (role check in logic or middleware)
     if (req.user.role !== 'educator' && req.user.role !== 'admin') {
         return res.status(403).json({ error: "Unauthorized" });
@@ -38,9 +38,4 @@ const updateTenantSettings = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-};
-
-module.exports = {
-    getTenantDetails,
-    updateTenantSettings
 };

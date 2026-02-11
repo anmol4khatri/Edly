@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const pdfSchema = new mongoose.Schema({
     title: {
@@ -13,4 +13,4 @@ const pdfSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 const Pdf = mongoose.model('Pdf', pdfSchema);
-module.exports = Pdf;
+export default Pdf;
