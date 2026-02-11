@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
 
 const connectDb = require("./config/database");
 const errorHandler = require("./middlewares/errorMiddleware");
@@ -23,9 +22,6 @@ const app = express();
 
 // Security Headers
 app.use(helmet());
-
-// Data Sanitization
-app.use(mongoSanitize());
 
 // Rate Limiting
 const limiter = rateLimit({
