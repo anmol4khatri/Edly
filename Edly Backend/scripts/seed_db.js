@@ -205,9 +205,9 @@ const seedData = async () => {
             title: 'Getting Started with Frontend',
             courseId: course1._id,
             content: [
-                { type: 'lesson', refId: lesson1._id },
-                { type: 'pdf', refId: pdf1._id },
-                { type: 'quiz', refId: quiz1._id }
+                { type: 'Lesson', refId: lesson1._id },
+                { type: 'Pdf', refId: pdf1._id },
+                { type: 'Quiz', refId: quiz1._id }
             ]
         });
 
@@ -221,7 +221,7 @@ const seedData = async () => {
             title: 'Backend Fundamentals',
             courseId: course1._id,
             content: [
-                { type: 'lesson', refId: lesson2._id }
+                { type: 'Lesson', refId: lesson2._id }
             ]
         });
 

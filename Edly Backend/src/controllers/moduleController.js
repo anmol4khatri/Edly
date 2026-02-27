@@ -12,7 +12,7 @@ export const createModule = async (req, res) => {
 export const getAllModulesByCourse = async (req, res) => {
 	const { courseId } = req.params;
 	const populatedModules = await moduleService.getAllModulesByCourse(req.tenant._id, req.user.role, courseId);
-	return res.status(200).json(populatedModules); // Left as original format since it was an array response
+	return ApiResponse.success(res, { modules: populatedModules }, "Modules retrieved", 200);
 };
 
 // Delete Module

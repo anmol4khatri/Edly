@@ -15,12 +15,13 @@ const moduleSchema = new mongoose.Schema({
         {
             type: {
                 type: String,
-                enum: ['lesson', 'pdf', 'quiz'],
+                enum: ['Lesson', 'Pdf', 'Quiz'],
                 required: true,
             },
             refId: {
                 type: mongoose.Schema.Types.ObjectId,
                 required: true,
+                refPath: 'content.type'
             }
         }
     ]
