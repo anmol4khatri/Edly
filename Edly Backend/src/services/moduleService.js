@@ -16,7 +16,11 @@ class ModuleService {
         return module;
     }
 
-    async createModule(tenantId, courseId, data) {
+    async createModule(tenantId, userRole, courseId, data) {
+        if (userRole !== 'educator' && userRole !== 'admin') {
+            throw new ForbiddenError("Unauthorized to manage modules");
+        }
+
         const { title, content } = data;
 
         if (!title) {
@@ -32,10 +36,12 @@ class ModuleService {
         if (content && content.length > 0) {
             processedContent = await Promise.all(content.map(async (item) => {
                 const { type, data } = item;
+                const contentData = { ...data, tenantId }; // Ensure tenant is bound
+
                 let createdItem;
-                if (type === "lesson") createdItem = await Lesson.create(data);
-                else if (type === "quiz") createdItem = await Quiz.create(data);
-                else if (type === "pdf") createdItem = await Pdf.create(data);
+                if (type === "lesson") createdItem = await Lesson.create(contentData);
+                else if (type === "quiz") createdItem = await Quiz.create(contentData);
+                else if (type === "pdf") createdItem = await Pdf.create(contentData);
                 else throw new ValidationError(`Invalid content type: ${type}`);
 
                 return { type, refId: createdItem._id };
@@ -53,7 +59,11 @@ class ModuleService {
         return newModule;
     }
 
-    async getAllModulesByCourse(tenantId, courseId) {
+    async getAllModulesByCourse(tenantId, userRole, courseId) {
+        if (userRole !== 'educator' && userRole !== 'admin') {
+            throw new ForbiddenError("Unauthorized to retrieve full module data");
+        }
+
         const course = await Course.findOne({ _id: courseId, tenantId });
         if (!course) {
             throw new NotFoundError("Course not found");
@@ -75,7 +85,11 @@ class ModuleService {
         return populatedModules;
     }
 
-    async deleteModule(tenantId, courseId, moduleId) {
+    async deleteModule(tenantId, userRole, courseId, moduleId) {
+        if (userRole !== 'educator' && userRole !== 'admin') {
+            throw new ForbiddenError("Unauthorized to manage modules");
+        }
+
         const course = await Course.findOne({ _id: courseId, tenantId });
         if (!course) {
             throw new NotFoundError("Course not found or access denied");
@@ -98,7 +112,11 @@ class ModuleService {
         return true;
     }
 
-    async addContent(tenantId, courseId, moduleId, content) {
+    async addContent(tenantId, userRole, courseId, moduleId, content) {
+        if (userRole !== 'educator' && userRole !== 'admin') {
+            throw new ForbiddenError("Unauthorized to manage modules");
+        }
+
         if (!content || !Array.isArray(content)) {
             throw new ValidationError("Content array required");
         }
@@ -115,10 +133,12 @@ class ModuleService {
 
         const newItems = await Promise.all(content.map(async (item) => {
             const { type, data } = item;
+            const contentData = { ...data, tenantId }; // Ensure tenant is bound
+
             let createdItem;
-            if (type === "lesson") createdItem = await Lesson.create(data);
-            else if (type === "quiz") createdItem = await Quiz.create(data);
-            else if (type === "pdf") createdItem = await Pdf.create(data);
+            if (type === "lesson") createdItem = await Lesson.create(contentData);
+            else if (type === "quiz") createdItem = await Quiz.create(contentData);
+            else if (type === "pdf") createdItem = await Pdf.create(contentData);
             else throw new ValidationError(`Invalid type: ${type}`);
             return { type, refId: createdItem._id };
         }));
@@ -132,7 +152,11 @@ class ModuleService {
         return updatedModule;
     }
 
-    async deleteContent(tenantId, moduleId, type, refId) {
+    async deleteContent(tenantId, userRole, moduleId, type, refId) {
+        if (userRole !== 'educator' && userRole !== 'admin') {
+            throw new ForbiddenError("Unauthorized to manage modules");
+        }
+
         const module = await this.verifyModuleOwnership(moduleId, tenantId);
         if (!module) {
             throw new NotFoundError("Module not found or access denied");

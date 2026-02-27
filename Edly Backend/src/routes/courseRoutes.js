@@ -13,7 +13,7 @@ router.put("/:courseId", asyncHandler(requireAuth), asyncHandler(courseControlle
 router.delete("/:courseId", asyncHandler(requireAuth), asyncHandler(courseController.deleteCourse));
 
 // Modules & Content
-router.get("/:courseId/modules", asyncHandler(moduleController.getAllModulesByCourse));
+router.get("/:courseId/modules", asyncHandler(requireAuth), asyncHandler(moduleController.getAllModulesByCourse));
 router.post("/:courseId/modules", asyncHandler(requireAuth), asyncHandler(moduleController.createModule));
 router.delete("/:courseId/modules/:moduleId", asyncHandler(requireAuth), asyncHandler(moduleController.deleteModule));
 

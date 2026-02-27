@@ -64,14 +64,17 @@ app.get("/health", (req, res) => res.json({ status: "ok", tenant: req.tenant?.su
 // Global Error Handler
 app.use(errorHandler);
 
-connectDb()
-    .then(() => {
-        console.log("Connected to the Database");
+const startServer = async () => {
+    try {
+        await connectDb();
         const port = process.env.PORT || 3000;
         app.listen(port, () => {
             console.log("Server is running at PORT: " + port);
         });
-    })
-    .catch((err) => {
-        console.error("Something went wrong while connecting to the database", err);
-    });
+    } catch (err) {
+        console.error("Failed to start server:", err);
+        process.exit(1);
+    }
+};
+
+startServer();
