@@ -1,4 +1,5 @@
 import Tenant from "#models/Tenant.js";
+import { ValidationError, NotFoundError, AppError } from "#utils/errors.js";
 
 // Simple in-memory cache for tenant resolution
 const tenantCache = new Map();
@@ -9,7 +10,7 @@ const resolveTenant = async (req, res, next) => {
     const host = req.headers.host;
 
     if (!host) {
-        return res.status(400).json({ error: 'Host header missing' });
+        return next(new ValidationError('Host header missing'));
     }
 
     // 2. Extract subdomain
@@ -41,7 +42,7 @@ const resolveTenant = async (req, res, next) => {
     if (!subdomain || subdomain === 'www') {
         // Allow requests to API root without tenant ONLY if strictly necessary (e.g. system admin?)
         // But for this app, everything is tenant scoped.
-        return res.status(400).json({ error: 'Invalid or missing subdomain' });
+        return next(new ValidationError('Invalid or missing subdomain'));
     }
 
     // 3. Check Cache
@@ -55,7 +56,7 @@ const resolveTenant = async (req, res, next) => {
 
     try {
         const tenant = await Tenant.findOne({ subdomain });
-        if (!tenant) return res.status(404).json({ error: 'Academy not found' });
+        if (!tenant) return next(new NotFoundError('Academy not found'));
 
         // Update Cache
         tenantCache.set(subdomain, { tenant, timestamp: Date.now() });
@@ -65,7 +66,7 @@ const resolveTenant = async (req, res, next) => {
         next();
     } catch (err) {
         console.error("Tenant resolution error:", err);
-        res.status(500).json({ error: 'Failed to resolve academy' });
+        return next(new AppError('Failed to resolve academy', 500));
     }
 };
 

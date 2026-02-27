@@ -1,13 +1,30 @@
+import { AppError, ValidationError } from "#utils/errors.js";
+import { logger } from "#utils/logger.js";
+
 const errorHandler = (err, req, res, next) => {
-    console.error(err.stack);
+    if (err instanceof AppError) {
+        return res.status(err.statusCode).json({
+            status: "error",
+            message: err.message,
+            ...(err instanceof ValidationError && { errors: err.errors }),
+        });
+    }
 
-    const statusCode = err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+    // Log unexpected errors
+    logger.error({
+        error: err.message,
+        stack: err.stack,
+        url: req.url,
+        method: req.method,
+    });
 
-    res.status(statusCode).json({
-        success: false,
-        error: message,
-        stack: process.env.NODE_ENV === 'production' ? null : err.stack
+    const message = process.env.NODE_ENV === "production"
+        ? "Internal server error"
+        : err.message;
+
+    res.status(500).json({
+        status: "error",
+        message,
     });
 };
 
