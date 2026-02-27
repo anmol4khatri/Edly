@@ -1,18 +1,16 @@
 
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const bcrypt = require('bcrypt');
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 
-const User = require('../src/models/User');
-const Tenant = require('../src/models/Tenant');
-const Educator = require('../src/models/Educator');
-const Student = require('../src/models/Student');
-const Course = require('../src/models/Course');
-const Module = require('../src/models/Module');
-const Lesson = require('../src/models/Lesson');
-const Pdf = require('../src/models/Pdf');
-const Quiz = require('../src/models/Quiz');
-const Enrollment = require('../src/models/Enrollment');
+import User from '../src/models/User.js';
+import Tenant from '../src/models/Tenant.js';
+import Course from '../src/models/Course.js';
+import Module from '../src/models/Module.js';
+import Lesson from '../src/models/Lesson.js';
+import Pdf from '../src/models/Pdf.js';
+import Quiz from '../src/models/Quiz.js';
+import Enrollment from '../src/models/Enrollment.js';
 
 dotenv.config();
 
@@ -40,8 +38,6 @@ const seedData = async () => {
         await Promise.all([
             User.deleteMany({}),
             Tenant.deleteMany({}),
-            Educator.deleteMany({}),
-            Student.deleteMany({}),
             Course.deleteMany({}),
             Module.deleteMany({}),
             Lesson.deleteMany({}),
@@ -131,118 +127,127 @@ const seedData = async () => {
             lastName: 'Prince'
         });
 
-        console.log('Seeding Separate Educator & Student Collections (populating all models/fields)...');
-
-        // Creating logic for 'Educator' model (separate from User based on file structure)
-        const edu1 = await Educator.create({
-            emailId: 'educator1@demo.com', // Matching email for consistency
-            password: educatorPass,
-            firstName: 'Alice',
-            lastName: 'Smith',
-            subdomain: 'alice-teach',
-            bio: 'Passionate about coding.',
-            organization: 'Tech University',
-            organizationLogo: 'https://via.placeholder.com/50',
-            experienceYears: 5,
-            qualifications: ['M.Sc. CS'],
-            isVerified: true,
-            isProfileComplete: true,
-            // coursesCreated will be populated after course creation if needed, or we rely on queries
-        });
-
-        // Creating logic for 'Student' model (requires educatorId)
-        await Student.create({
-            educatorId: edu1._id,
-            firstName: 'Charlie',
-            lastName: 'Brown',
-            emailId: 'student1@demo.com',
-            password: studentPass
-        });
-
         console.log('Seeding Courses...');
 
-        const course1 = await Course.create({
-            tenantId: demoTenant._id,
-            title: 'Full Stack Web Development',
-            description: 'Master the MERN stack with this comprehensive course covering MongoDB, Express, React, and Node.js.',
-            thumbnail: 'https://via.placeholder.com/300x200?text=MERN+Stack',
-            price: 49.99,
-            aboutCourse: ['Learn React from scratch', 'Master Backend API design', 'Database optimization techniques'],
-            highlights: ['50+ Hours of Content', 'Certificate of Completion', 'Lifetime Access'],
-            modules: [] // Will populate after creating modules
-        });
+        const videoLinks = [
+            'https://www.youtube.com/watch?v=kYmZ6hWb5w0', // Codecademy
+            'https://www.youtube.com/watch?v=w7ejDZ8SWv8', // Crash Course
+            'https://www.youtube.com/watch?v=PkZNo7MFNFg', // Javascript Full Course
+            'https://www.youtube.com/watch?v=pKd0Rpw7O48', // How to learn Backend
+            'https://www.youtube.com/watch?v=qz0aGYrrlhU', // HTML Tutorial
+            'https://www.youtube.com/watch?v=BwuLxPH8IDs', // CSS
+            'https://www.youtube.com/watch?v=hdI2bqOjy3c', // JS basics
+            'https://www.youtube.com/watch?v=Oe421EPjeBE', // Node JS 
+            'https://www.youtube.com/watch?v=SccSCuHhOw0', // React Router
+            'https://www.youtube.com/watch?v=f2EqECiTBL8', // Next.js
+        ];
 
-        // Update Educator User with created course? User model doesn't have coursesCreated, but Educator model does.
-        edu1.coursesCreated.push(course1._id);
-        await edu1.save();
+        const coursesData = [
+            { title: 'Mastering the MERN Stack', price: 99.99, thumb: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600' },
+            { title: 'Data Structures Bootcamp', price: 149.99, thumb: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=600' },
+            { title: 'UI/UX Masterclass for Devs', price: 79.99, thumb: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600' },
+            { title: 'Python Django for Beginners', price: 49.99, thumb: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=600' },
+            { title: 'Advanced Cloud Architecture', price: 199.99, thumb: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600' },
+        ];
 
+        const createdCourses = [];
 
-        console.log('Seeding Modules & Content...');
+        for (let i = 0; i < coursesData.length; i++) {
+            const courseData = coursesData[i];
+            const course = await Course.create({
+                tenantId: demoTenant._id,
+                title: courseData.title,
+                description: `Learn everything you need to know about ${courseData.title} in this highly interactive, industry-standard modern curriculum.`,
+                thumbnail: courseData.thumb,
+                price: courseData.price,
+                aboutCourse: [
+                    'Build 3+ Real World Projects',
+                    'Access to exclusive discord community',
+                    'Learn directly from Senior Engineers'
+                ],
+                highlights: [
+                    '50+ Hours of High Quality Video Content',
+                    'Certificate of Completion',
+                    'Lifetime Future-Proof Access'
+                ],
+                modules: []
+            });
+            createdCourses.push(course);
 
-        // Module 1
-        const lesson1 = await Lesson.create({
-            title: 'Introduction to React',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-        });
+            // Create 4 Modules per Course
+            for (let m = 1; m <= 4; m++) {
+                const moduleContent = [];
 
-        const pdf1 = await Pdf.create({
-            title: 'React Cheatsheet',
-            pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
-        });
-
-        const quiz1 = await Quiz.create({
-            title: 'React Basics Quiz',
-            questions: [
-                {
-                    question: 'What is a Component?',
-                    options: ['A function', 'A variable', 'A database', 'A server'],
-                    correctAnswer: 0
+                // Create 4-6 Lessons per Module
+                const lessonCount = Math.floor(Math.random() * 3) + 4;
+                for (let l = 1; l <= lessonCount; l++) {
+                    const videoUrl = videoLinks[Math.floor(Math.random() * videoLinks.length)];
+                    const lesson = await Lesson.create({
+                        tenantId: demoTenant._id,
+                        title: `Lesson ${l}: Deep Dive into Core Concept ${m}.${l}`,
+                        videoUrl: videoUrl
+                    });
+                    moduleContent.push({ type: 'Lesson', refId: lesson._id });
                 }
-            ]
-        });
 
-        const module1 = await Module.create({
-            title: 'Getting Started with Frontend',
-            courseId: course1._id,
-            content: [
-                { type: 'lesson', refId: lesson1._id },
-                { type: 'pdf', refId: pdf1._id },
-                { type: 'quiz', refId: quiz1._id }
-            ]
-        });
+                // Add 1 Pdf 
+                const pdf = await Pdf.create({
+                    tenantId: demoTenant._id,
+                    title: `Cheat Sheet for Module ${m}`,
+                    pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+                });
+                moduleContent.push({ type: 'Pdf', refId: pdf._id });
 
-        // Module 2
-        const lesson2 = await Lesson.create({
-            title: 'Express Middleware',
-            videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-        });
+                // Add 1 Quiz per module
+                const quiz = await Quiz.create({
+                    tenantId: demoTenant._id,
+                    title: `Module ${m} Assessment Quiz`,
+                    questions: [
+                        { question: 'What is the primary benefit of the topic covered in this module?', options: ['Scalability', 'Slower Rendering', 'Higher Costs', 'Harder debugging'], correctAnswer: 0 },
+                        { question: 'Which native API allows us to accomplish this?', options: ['fs.readFile()', 'localStorage', 'navigator.share', 'All of the above'], correctAnswer: 3 }
+                    ]
+                });
+                moduleContent.push({ type: 'Quiz', refId: quiz._id });
 
-        const module2 = await Module.create({
-            title: 'Backend Fundamentals',
-            courseId: course1._id,
-            content: [
-                { type: 'lesson', refId: lesson2._id }
-            ]
-        });
-
-        // Update Course with Modules
-        course1.modules.push(module1._id, module2._id);
-        await course1.save();
-
+                const mod = await Module.create({
+                    title: m === 1 ? 'Getting Started & Fundamentals' : (m === 4 ? 'Advanced Concepts & Deployment' : `Intermediate Section ${m}`),
+                    courseId: course._id,
+                    content: moduleContent
+                });
+                course.modules.push(mod._id);
+            }
+            await course.save();
+        }
 
         console.log('Seeding Enrollments...');
 
-        // Enroll Student 1 in Course 1
-        await Enrollment.create({
-            studentId: studentUser1._id, // References User model
-            courseId: course1._id,
-            tenantId: demoTenant._id,
-            paymentId: 'PAY-123456789'
-        });
+        // Enroll students in a few courses
+        for (let i = 0; i < createdCourses.length; i++) {
+            const course = createdCourses[i];
 
-        // Update User model coursesEnrolled
-        studentUser1.coursesEnrolled.push(course1._id);
+            // Student 1 buys all courses
+            await Enrollment.create({
+                studentId: studentUser1._id,
+                courseId: course._id,
+                tenantId: demoTenant._id,
+                paymentId: `PAY-${Math.floor(Math.random() * 900000) + 100000}`
+            });
+            studentUser1.coursesEnrolled.push(course._id);
+
+            // Student 2 buys the first 2 courses
+            if (i < 2) {
+                await Enrollment.create({
+                    studentId: studentUser2._id,
+                    courseId: course._id,
+                    tenantId: demoTenant._id,
+                    paymentId: `PAY-${Math.floor(Math.random() * 900000) + 100000}`
+                });
+                studentUser2.coursesEnrolled.push(course._id);
+            }
+        }
+
         await studentUser1.save();
+        await studentUser2.save();
 
 
         console.log('------------------------------------------------');

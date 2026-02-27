@@ -52,28 +52,13 @@ class EnrollmentService {
             throw new NotFoundError("Course not found");
         }
 
-        const modules = await Module.find({ courseId }).lean();
-
-        // Populate content manually
-        const populatedModules = await Promise.all(modules.map(async (mod) => {
-            const content = await Promise.all(mod.content.map(async (item) => {
-                let actual;
-                if (item.type === 'lesson') {
-                    actual = await Lesson.findById(item.refId).lean();
-                } else if (item.type === 'pdf') {
-                    actual = await Pdf.findById(item.refId).lean();
-                } else if (item.type === 'quiz') {
-                    actual = await Quiz.findById(item.refId).lean();
-                }
-                return { type: item.type, data: actual };
-            }));
-
-            return { ...mod, content };
-        }));
+        const modules = await Module.find({ courseId })
+            .populate('content.refId')
+            .lean();
 
         return {
             ...course,
-            modules: populatedModules
+            modules
         };
     }
 }

@@ -25,6 +25,5 @@ export const getEnrolledCourseContent = async (req, res) => {
 
     const courseData = await enrollmentService.getEnrolledCourseContent(tenantId, studentId, courseId);
 
-    // Kept original implicit response structure as some clients might depend on the direct object
-    return res.json(courseData);
+    return ApiResponse.success(res, courseData, "Course content retrieved", 200);
 };

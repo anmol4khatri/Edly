@@ -39,9 +39,9 @@ class ModuleService {
                 const contentData = { ...data, tenantId }; // Ensure tenant is bound
 
                 let createdItem;
-                if (type === "lesson") createdItem = await Lesson.create(contentData);
-                else if (type === "quiz") createdItem = await Quiz.create(contentData);
-                else if (type === "pdf") createdItem = await Pdf.create(contentData);
+                if (type === "Lesson") createdItem = await Lesson.create(contentData);
+                else if (type === "Quiz") createdItem = await Quiz.create(contentData);
+                else if (type === "Pdf") createdItem = await Pdf.create(contentData);
                 else throw new ValidationError(`Invalid content type: ${type}`);
 
                 return { type, refId: createdItem._id };
@@ -69,20 +69,8 @@ class ModuleService {
             throw new NotFoundError("Course not found");
         }
 
-        const modules = await Module.find({ courseId });
-
-        const populatedModules = await Promise.all(modules.map(async (module) => {
-            const populatedContent = await Promise.all(module.content.map(async (item) => {
-                let fullData;
-                if (item.type === "lesson") fullData = await Lesson.findById(item.refId);
-                else if (item.type === "quiz") fullData = await Quiz.findById(item.refId);
-                else if (item.type === "pdf") fullData = await Pdf.findById(item.refId);
-                return { type: item.type, refId: item.refId, data: fullData };
-            }));
-            return { ...module.toObject(), content: populatedContent };
-        }));
-
-        return populatedModules;
+        const modules = await Module.find({ courseId }).populate('content.refId');
+        return modules;
     }
 
     async deleteModule(tenantId, userRole, courseId, moduleId) {
@@ -101,9 +89,9 @@ class ModuleService {
         }
 
         await Promise.all(module.content.map(async (item) => {
-            if (item.type === "lesson") await Lesson.findByIdAndDelete(item.refId);
-            else if (item.type === "quiz") await Quiz.findByIdAndDelete(item.refId);
-            else if (item.type === "pdf") await Pdf.findByIdAndDelete(item.refId);
+            if (item.type === "Lesson") await Lesson.findByIdAndDelete(item.refId);
+            else if (item.type === "Quiz") await Quiz.findByIdAndDelete(item.refId);
+            else if (item.type === "Pdf") await Pdf.findByIdAndDelete(item.refId);
         }));
 
         await Module.deleteOne({ _id: moduleId });
@@ -136,9 +124,9 @@ class ModuleService {
             const contentData = { ...data, tenantId }; // Ensure tenant is bound
 
             let createdItem;
-            if (type === "lesson") createdItem = await Lesson.create(contentData);
-            else if (type === "quiz") createdItem = await Quiz.create(contentData);
-            else if (type === "pdf") createdItem = await Pdf.create(contentData);
+            if (type === "Lesson") createdItem = await Lesson.create(contentData);
+            else if (type === "Quiz") createdItem = await Quiz.create(contentData);
+            else if (type === "Pdf") createdItem = await Pdf.create(contentData);
             else throw new ValidationError(`Invalid type: ${type}`);
             return { type, refId: createdItem._id };
         }));
@@ -167,9 +155,9 @@ class ModuleService {
             throw new NotFoundError("Content item not found in this module");
         }
 
-        if (type === "lesson") await Lesson.findByIdAndDelete(refId);
-        else if (type === "quiz") await Quiz.findByIdAndDelete(refId);
-        else if (type === "pdf") await Pdf.findByIdAndDelete(refId);
+        if (type === "Lesson") await Lesson.findByIdAndDelete(refId);
+        else if (type === "Quiz") await Quiz.findByIdAndDelete(refId);
+        else if (type === "Pdf") await Pdf.findByIdAndDelete(refId);
 
         const updatedModule = await Module.findByIdAndUpdate(
             moduleId,
