@@ -1,5 +1,9 @@
 import Course from "#models/Course.js";
 import Enrollment from "#models/Enrollment.js";
+import Module from "#models/Module.js";
+import Lesson from "#models/Lesson.js";
+import Pdf from "#models/Pdf.js";
+import Quiz from "#models/Quiz.js";
 import { NotFoundError, ForbiddenError } from "#utils/errors.js";
 
 class CourseService {
@@ -54,12 +58,32 @@ class CourseService {
     }
 
     async getCourseById(tenantId, courseId, user = null) {
-        const course = await Course.findOne({ _id: courseId, tenantId })
-            .populate("modules");
+        const course = await Course.findOne({ _id: courseId, tenantId }).lean();
 
         if (!course) {
             throw new NotFoundError("Course not found");
         }
+
+        const modules = await Module.find({ courseId }).lean();
+        const modulePreviews = await Promise.all(modules.map(async (mod) => {
+            const previewContent = await Promise.all(mod.content.map(async (item) => {
+                let title = "Content";
+                if (item.type === 'lesson') {
+                    const l = await Lesson.findById(item.refId).select('title').lean();
+                    if (l) title = l.title;
+                } else if (item.type === 'pdf') {
+                    const p = await Pdf.findById(item.refId).select('title').lean();
+                    if (p) title = p.title;
+                } else if (item.type === 'quiz') {
+                    const q = await Quiz.findById(item.refId).select('title').lean();
+                    if (q) title = q.title;
+                }
+                return { type: item.type, title };
+            }));
+            return { _id: mod._id, title: mod.title, contentPreview: previewContent };
+        }));
+
+        course.modules = modulePreviews;
 
         let isEnrolled = false;
         if (user) {

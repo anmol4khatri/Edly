@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
 const quizSchema = new mongoose.Schema({
+    tenantId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tenant',
+        required: true,
+        index: true
+    },
     title: {
         type: String,
         required: true,
