@@ -1,103 +1,103 @@
-import Course from "#models/Course.js";
-import Enrollment from "#models/Enrollment.js";
-import Module from "#models/Module.js";
-import Lesson from "#models/Lesson.js";
-import Pdf from "#models/Pdf.js";
-import Quiz from "#models/Quiz.js";
-import { NotFoundError, ForbiddenError } from "#utils/errors.js";
+import Course from '#models/Course.js';
+import Enrollment from '#models/Enrollment.js';
+import Module from '#models/Module.js';
+import Lesson from '#models/Lesson.js';
+import Pdf from '#models/Pdf.js';
+import Quiz from '#models/Quiz.js';
+import { NotFoundError, ForbiddenError } from '#utils/errors.js';
 
 class CourseService {
-    async createCourse(tenantId, userRole, data) {
-        if (userRole !== 'educator' && userRole !== 'admin') {
-            throw new ForbiddenError("Only educators can create courses");
-        }
-
-        const { title, description, thumbnail, price, aboutCourse, highlights } = data;
-
-        const course = new Course({
-            tenantId,
-            title,
-            description,
-            thumbnail,
-            price,
-            aboutCourse,
-            highlights,
-        });
-
-        await course.save();
-        return course;
+  async createCourse(tenantId, userRole, data) {
+    if (userRole !== 'educator' && userRole !== 'admin') {
+      throw new ForbiddenError('Only educators can create courses');
     }
 
-    async updateCourse(tenantId, userRole, courseId, updates) {
-        if (userRole !== 'educator' && userRole !== 'admin') {
-            throw new ForbiddenError("Unauthorized to update course");
-        }
+    const { title, description, thumbnail, price, aboutCourse, highlights } = data;
 
-        const course = await Course.findOne({ _id: courseId, tenantId });
-        if (!course) {
-            throw new NotFoundError("Course not found");
-        }
+    const course = new Course({
+      tenantId,
+      title,
+      description,
+      thumbnail,
+      price,
+      aboutCourse,
+      highlights,
+    });
 
-        Object.keys(updates).forEach((update) => course[update] = updates[update]);
-        await course.save();
+    await course.save();
+    return course;
+  }
 
-        return course;
+  async updateCourse(tenantId, userRole, courseId, updates) {
+    if (userRole !== 'educator' && userRole !== 'admin') {
+      throw new ForbiddenError('Unauthorized to update course');
     }
 
-    async getAllCourses(tenantId, page = 1, limit = 10) {
-        const skip = (page - 1) * limit;
-
-        const courses = await Course.find({ tenantId })
-            .select('title description thumbnail price') // Lightweight for list
-            .skip(skip)
-            .limit(limit);
-
-        const total = await Course.countDocuments({ tenantId });
-
-        return { courses, total };
+    const course = await Course.findOne({ _id: courseId, tenantId });
+    if (!course) {
+      throw new NotFoundError('Course not found');
     }
 
-    async getCourseById(tenantId, courseId, user = null) {
-        const course = await Course.findOne({ _id: courseId, tenantId }).lean();
+    Object.keys(updates).forEach((update) => (course[update] = updates[update]));
+    await course.save();
 
-        if (!course) {
-            throw new NotFoundError("Course not found");
-        }
+    return course;
+  }
 
-        const modules = await Module.find({ courseId })
-            .populate({
-                path: 'content.refId',
-                select: 'title' // ONLY fetch the title for the public preview
-            })
-            .lean();
+  async getAllCourses(tenantId, page = 1, limit = 10) {
+    const skip = (page - 1) * limit;
 
-        course.modules = modules;
+    const courses = await Course.find({ tenantId })
+      .select('title description thumbnail price') // Lightweight for list
+      .skip(skip)
+      .limit(limit);
 
-        let isEnrolled = false;
-        if (user) {
-            const enrollment = await Enrollment.findOne({
-                courseId: courseId,
-                studentId: user._id,
-                tenantId
-            });
-            if (enrollment) isEnrolled = true;
-        }
+    const total = await Course.countDocuments({ tenantId });
 
-        return { course, isEnrolled };
+    return { courses, total };
+  }
+
+  async getCourseById(tenantId, courseId, user = null) {
+    const course = await Course.findOne({ _id: courseId, tenantId }).lean();
+
+    if (!course) {
+      throw new NotFoundError('Course not found');
     }
 
-    async deleteCourse(tenantId, userRole, courseId) {
-        if (userRole !== 'educator' && userRole !== 'admin') {
-            throw new ForbiddenError("Unauthorized to delete course");
-        }
+    const modules = await Module.find({ courseId })
+      .populate({
+        path: 'content.refId',
+        select: 'title', // ONLY fetch the title for the public preview
+      })
+      .lean();
 
-        const course = await Course.findOneAndDelete({ _id: courseId, tenantId });
-        if (!course) {
-            throw new NotFoundError("Course not found");
-        }
+    course.modules = modules;
 
-        return true;
+    let isEnrolled = false;
+    if (user) {
+      const enrollment = await Enrollment.findOne({
+        courseId: courseId,
+        studentId: user._id,
+        tenantId,
+      });
+      if (enrollment) isEnrolled = true;
     }
+
+    return { course, isEnrolled };
+  }
+
+  async deleteCourse(tenantId, userRole, courseId) {
+    if (userRole !== 'educator' && userRole !== 'admin') {
+      throw new ForbiddenError('Unauthorized to delete course');
+    }
+
+    const course = await Course.findOneAndDelete({ _id: courseId, tenantId });
+    if (!course) {
+      throw new NotFoundError('Course not found');
+    }
+
+    return true;
+  }
 }
 
 export const courseService = new CourseService();

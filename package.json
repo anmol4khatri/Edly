@@ -10,14 +10,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "Edly Frontend/**/*.{js,jsx}": [
-      "prettier --write",
-      "npm --prefix \"Edly Frontend\" run lint --"
-    ],
-    "Edly Backend/**/*.js": [
-      "prettier --write",
-      "npm --prefix \"Edly Backend\" run lint --"
-    ]
+    "*": "prettier --write --ignore-unknown"
   },
   "repository": {
     "type": "git",

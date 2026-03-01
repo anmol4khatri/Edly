@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -8,32 +8,32 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { HelpCircle } from "lucide-react"
-import { useState, useRef } from "react"
+} from '@/components/ui/dialog';
+import { HelpCircle } from 'lucide-react';
+import { useState, useRef } from 'react';
 
 const QuizRulesDialog = ({ quiz }) => {
-  const [hasReadToBottom, setHasReadToBottom] = useState(false)
-  const contentRef = useRef(null)
+  const [hasReadToBottom, setHasReadToBottom] = useState(false);
+  const contentRef = useRef(null);
 
   const handleScroll = () => {
-    const content = contentRef.current
-    if (!content) return
-    const scrollPercentage = content.scrollTop / (content.scrollHeight - content.clientHeight)
+    const content = contentRef.current;
+    if (!content) return;
+    const scrollPercentage = content.scrollTop / (content.scrollHeight - content.clientHeight);
     if (scrollPercentage >= 0.99 && !hasReadToBottom) {
-      setHasReadToBottom(true)
+      setHasReadToBottom(true);
     }
-  }
+  };
 
   const handleStartQuiz = () => {
     // Handle quiz start logic here
-    console.log("Starting quiz:", quiz.title)
-  }
+    console.log('Starting quiz:', quiz.title);
+  };
 
   return (
     <Dialog
       onOpenChange={(open) => {
-        if (open) setHasReadToBottom(false)
+        if (open) setHasReadToBottom(false);
       }}
     >
       <DialogTrigger asChild>
@@ -62,9 +62,9 @@ const QuizRulesDialog = ({ quiz }) => {
                         <strong>Quiz Instructions</strong>
                       </p>
                       <p>
-                        Please read all instructions carefully before starting the quiz. This quiz is designed to test
-                        your understanding of the module content. Make sure you have completed all lessons and reviewed
-                        the materials.
+                        Please read all instructions carefully before starting the quiz. This quiz
+                        is designed to test your understanding of the module content. Make sure you
+                        have completed all lessons and reviewed the materials.
                       </p>
                     </div>
                     <div className="space-y-1">
@@ -72,9 +72,9 @@ const QuizRulesDialog = ({ quiz }) => {
                         <strong>Time Limit</strong>
                       </p>
                       <p>
-                        You will have 30 minutes to complete this quiz. The timer will start once you begin the quiz.
-                        Make sure you have a stable internet connection and are in a quiet environment where you can
-                        focus.
+                        You will have 30 minutes to complete this quiz. The timer will start once
+                        you begin the quiz. Make sure you have a stable internet connection and are
+                        in a quiet environment where you can focus.
                       </p>
                     </div>
                     <div className="space-y-1">
@@ -82,8 +82,9 @@ const QuizRulesDialog = ({ quiz }) => {
                         <strong>Question Format</strong>
                       </p>
                       <p>
-                        The quiz contains multiple-choice questions. Each question has only one correct answer. Read
-                        each question carefully and select the best answer from the provided options.
+                        The quiz contains multiple-choice questions. Each question has only one
+                        correct answer. Read each question carefully and select the best answer from
+                        the provided options.
                       </p>
                     </div>
                     <div className="space-y-1">
@@ -91,9 +92,9 @@ const QuizRulesDialog = ({ quiz }) => {
                         <strong>Scoring System</strong>
                       </p>
                       <p>
-                        Each correct answer is worth 1 point. There is no negative marking for incorrect answers. You
-                        need to score at least 70% to pass the quiz. Your results will be available immediately after
-                        submission.
+                        Each correct answer is worth 1 point. There is no negative marking for
+                        incorrect answers. You need to score at least 70% to pass the quiz. Your
+                        results will be available immediately after submission.
                       </p>
                     </div>
                     <div className="space-y-1">
@@ -113,8 +114,9 @@ const QuizRulesDialog = ({ quiz }) => {
                         <strong>Technical Requirements</strong>
                       </p>
                       <p>
-                        Make sure your device has a stable internet connection. The quiz will automatically save your
-                        progress, but avoid refreshing the page or closing the browser during the quiz.
+                        Make sure your device has a stable internet connection. The quiz will
+                        automatically save your progress, but avoid refreshing the page or closing
+                        the browser during the quiz.
                       </p>
                     </div>
                     <div className="space-y-1">
@@ -122,8 +124,9 @@ const QuizRulesDialog = ({ quiz }) => {
                         <strong>Support</strong>
                       </p>
                       <p>
-                        If you encounter any technical issues during the quiz, please contact the course administrator
-                        immediately. Do not attempt to restart the quiz without proper guidance.
+                        If you encounter any technical issues during the quiz, please contact the
+                        course administrator immediately. Do not attempt to restart the quiz without
+                        proper guidance.
                       </p>
                     </div>
                   </div>
@@ -139,7 +142,11 @@ const QuizRulesDialog = ({ quiz }) => {
             </span>
           )}
           <DialogClose asChild>
-           <Button type="button" variant="default" className="bg-white/10 text-white hover:text-white hover:bg-white/20">
+            <Button
+              type="button"
+              variant="default"
+              className="bg-white/10 text-white hover:text-white hover:bg-white/20"
+            >
               Cancel
             </Button>
           </DialogClose>
@@ -151,7 +158,7 @@ const QuizRulesDialog = ({ quiz }) => {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default QuizRulesDialog
+export default QuizRulesDialog;
