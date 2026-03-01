@@ -2,6 +2,6 @@ node_modules
 dist
 build
 coverage
-package-lock.json
+**/package-lock.json
 Edly Backend/*.postman_collection.json
 **/.agents
