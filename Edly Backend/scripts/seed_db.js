@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 
+import { logger } from '#utils/logger.js';
 import User from '../src/models/User.js';
 import Tenant from '../src/models/Tenant.js';
 import Course from '../src/models/Course.js';
@@ -18,9 +19,9 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/edly';
 const connectDB = async () => {
   try {
     await mongoose.connect(MONGO_URI);
-    console.log(`MongoDB Connected: ${mongoose.connection.host}`);
+    logger.info(`MongoDB Connected: ${mongoose.connection.host}`);
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    logger.error(`Error: ${error.message}`);
     process.exit(1);
   }
 };
@@ -33,7 +34,7 @@ const seedData = async () => {
   try {
     await connectDB();
 
-    console.log('Clearing existing data...');
+    logger.info('Clearing existing data...');
     await Promise.all([
       User.deleteMany({}),
       Tenant.deleteMany({}),
@@ -44,9 +45,9 @@ const seedData = async () => {
       Quiz.deleteMany({}),
       Enrollment.deleteMany({}),
     ]);
-    console.log('Data cleared.');
+    logger.info('Data cleared.');
 
-    console.log('Seeding Tenant...');
+    logger.info('Seeding Tenant...');
     const tenantOwnerPass = await hashPassword('password123');
     // We need a user to be the owner, but User needs a tenantId.
     // So we create Tenant first with a placeholder or null owner, then update it?
@@ -69,7 +70,7 @@ const seedData = async () => {
       },
     });
 
-    console.log('Seeding Users...');
+    logger.info('Seeding Users...');
 
     // 1. Tenant Admin / Owner
     const tenantAdmin = await User.create({
@@ -126,7 +127,7 @@ const seedData = async () => {
       lastName: 'Prince',
     });
 
-    console.log('Seeding Courses...');
+    logger.info('Seeding Courses...');
 
     const videoLinks = [
       'https://www.youtube.com/watch?v=kYmZ6hWb5w0', // Codecademy
@@ -251,7 +252,7 @@ const seedData = async () => {
       await course.save();
     }
 
-    console.log('Seeding Enrollments...');
+    logger.info('Seeding Enrollments...');
 
     // Enroll students in a few courses
     for (let i = 0; i < createdCourses.length; i++) {
@@ -281,27 +282,27 @@ const seedData = async () => {
     await studentUser1.save();
     await studentUser2.save();
 
-    console.log('------------------------------------------------');
-    console.log('SEEDING COMPLETE');
-    console.log('------------------------------------------------');
-    console.log('Login Credentials (User Model - for Auth):');
-    console.log('');
-    console.log('1. Admin / Tenant Owner');
-    console.log(`   Email:    admin@demo.com`);
-    console.log(`   Password: password123`);
-    console.log('');
-    console.log('2. Educator');
-    console.log(`   Email:    educator1@demo.com`);
-    console.log(`   Password: educator123`);
-    console.log('');
-    console.log('3. Student');
-    console.log(`   Email:    student1@demo.com`);
-    console.log(`   Password: student123`);
-    console.log('------------------------------------------------');
+    logger.info('------------------------------------------------');
+    logger.info('SEEDING COMPLETE');
+    logger.info('------------------------------------------------');
+    logger.info('Login Credentials (User Model - for Auth):');
+    logger.info('');
+    logger.info('1. Admin / Tenant Owner');
+    logger.info(`   Email:    admin@demo.com`);
+    logger.info(`   Password: password123`);
+    logger.info('');
+    logger.info('2. Educator');
+    logger.info(`   Email:    educator1@demo.com`);
+    logger.info(`   Password: educator123`);
+    logger.info('');
+    logger.info('3. Student');
+    logger.info(`   Email:    student1@demo.com`);
+    logger.info(`   Password: student123`);
+    logger.info('------------------------------------------------');
 
     process.exit(0);
   } catch (err) {
-    console.error('Seeding failed:', err);
+    logger.error(err, 'Seeding failed');
     process.exit(1);
   }
 };
