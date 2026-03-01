@@ -57,7 +57,7 @@ export function LoginForm({ className, ...props }) {
         </Button>
       </div>
       <div className="text-center text-sm">
-        Don't have an account?{' '}
+        Don&apos;t have an account?{' '}
         <a
           href={props.role === 'educator' ? '/educator/signup' : '/student/signup'}
           className="underline underline-offset-4"

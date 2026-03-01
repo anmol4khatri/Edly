@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -33,7 +32,7 @@ const quizOptions = [
 ];
 
 const QuizPage = () => {
-  const { quizId } = useParams();
+  // const { quizId } = useParams();
   const [selectedOption, setSelectedOption] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [isLastQuestionAnswered, setIsLastQuestionAnswered] = useState(false);
@@ -64,7 +63,6 @@ const QuizPage = () => {
 
   const handleSubmit = () => {
     // Handle quiz submission logic here
-    console.log('Quiz submitted!');
   };
 
   return (

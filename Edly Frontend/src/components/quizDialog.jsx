@@ -27,7 +27,6 @@ const QuizRulesDialog = ({ quiz }) => {
 
   const handleStartQuiz = () => {
     // Handle quiz start logic here
-    console.log('Starting quiz:', quiz.title);
   };
 
   return (

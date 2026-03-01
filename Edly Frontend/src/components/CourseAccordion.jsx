@@ -4,9 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Video } from 'lucide-react';
-import { NotebookPen } from 'lucide-react';
-import { Key } from 'lucide-react';
 import { Play, FileText, HelpCircle } from 'lucide-react';
 
 const modules = [
@@ -163,8 +160,8 @@ const modules = [
 ];
 
 const CourseAccordion = () => {
-  const handleItemClick = (data) => {
-    console.log(data);
+  const handleItemClick = () => {
+    // Handle item click logic here
   };
   return (
     <div className="px-0 min-sm:py-5 w-8/12 space-y-5 mt-5 min-sm:mb-8 max-sm:px-0 max-sm:w-full max-sm:space-y-4 max-sm:mt-0">
@@ -184,7 +181,7 @@ const CourseAccordion = () => {
                 <div
                   key={item.data._id}
                   className="flex gap-3 p-1.5 w-full"
-                  onClick={() => handleItemClick(item.data)}
+                  onClick={() => handleItemClick()}
                 >
                   <span className="text-primary">
                     {item.type === 'lesson' ? (

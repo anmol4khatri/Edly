@@ -5,7 +5,7 @@ import { Clock } from 'lucide-react';
 import { HelpCircle } from 'lucide-react';
 import { Download } from 'lucide-react';
 import { Briefcase } from 'lucide-react';
-import { Infinity } from 'lucide-react';
+import { Infinity as InfinityIcon } from 'lucide-react';
 import { Award } from 'lucide-react';
 
 const CourseBanner = () => {
@@ -14,7 +14,7 @@ const CourseBanner = () => {
     { icon: HelpCircle, text: 'More than 18 Quizes' },
     { icon: Download, text: '13 downloadable resources' },
     { icon: Briefcase, text: 'Industry grade project' },
-    { icon: Infinity, text: 'Life time access' },
+    { icon: InfinityIcon, text: 'Life time access' },
     { icon: Award, text: 'Certificate of completion' },
   ];
 
@@ -62,7 +62,7 @@ const CourseBanner = () => {
               <p className="text-[#a3a4a6]">Industry grade project</p>
             </div>
             <div className="flex gap-2 text-lg pb-2">
-              <Infinity className="p-0.5 text-primary" />
+              <InfinityIcon className="p-0.5 text-primary" />
               <p className="text-[#a3a4a6]">Life time access</p>
             </div>
             <div className="flex gap-2 text-lg pb-2">

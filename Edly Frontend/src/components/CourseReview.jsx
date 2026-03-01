@@ -80,7 +80,7 @@ const sampleCourseReviews = [
 ];
 
 export default function Component() {
-  const [courseReviews, setCourseReviews] = useState(sampleCourseReviews);
+  const [courseReviews] = useState(sampleCourseReviews);
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (

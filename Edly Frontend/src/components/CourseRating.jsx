@@ -33,7 +33,6 @@ export default function CustomerReviews() {
 
   const handleSubmitReview = () => {
     // Handle review submission logic
-    console.log({ rating, reviewText });
     setIsDialogOpen(false);
     setRating(0);
     setReviewText('');

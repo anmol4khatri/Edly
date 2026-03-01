@@ -198,7 +198,7 @@ const VideoAccordion = () => {
             <AccordionTrigger className="text-lg">{module.title}</AccordionTrigger>
             <AccordionContent className="text-muted-foreground text-base">
               <div className="space-y-3 mt-4">
-                {module.content.map((item, contentIndex) => {
+                {module.content.map((item) => {
                   if (item.type === 'quiz') {
                     return <QuizRulesDialog key={item.data._id} quiz={item.data} />;
                   }
