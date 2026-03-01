@@ -1,23 +1,22 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import { logger } from '#utils/logger.js';
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 dotenv.config(); // Expects .env in CWD (Edly Backend root)
 
 const resetDb = async () => {
   try {
     const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/edly';
-    logger.info(`Using URI: ${mongoUri.split('@')[1] || 'localhost'}`); // Log safely
+    console.log(`Using URI: ${mongoUri.split('@')[1] || 'localhost'}`); // Log safely
     await mongoose.connect(mongoUri);
 
     // Drop the entire database
     await mongoose.connection.db.dropDatabase();
-    logger.info('SUCCESS: Database dropped completely.');
+    console.log('SUCCESS: Database dropped completely.');
   } catch (err) {
-    logger.error(err, 'Error resetting DB');
+    console.error('Error resetting DB:', err);
   } finally {
     await mongoose.connection.close();
-    logger.info('Connection closed.');
+    console.log('Connection closed.');
   }
 };
 
