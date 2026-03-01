@@ -1,5 +1,6 @@
 import Tenant from '#models/Tenant.js';
 import { ValidationError, NotFoundError, AppError } from '#utils/errors.js';
+import { logger } from '#utils/logger.js';
 
 // Simple in-memory cache for tenant resolution
 const tenantCache = new Map();
@@ -65,7 +66,7 @@ const resolveTenant = async (req, res, next) => {
     req.tenant = tenant;
     next();
   } catch (err) {
-    console.error('Tenant resolution error:', err);
+    logger.error('Tenant resolution error:', err);
     return next(new AppError('Failed to resolve academy', 500));
   }
 };

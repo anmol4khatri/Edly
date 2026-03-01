@@ -1,7 +1,7 @@
 import { AppError, ValidationError } from '#utils/errors.js';
 import { logger } from '#utils/logger.js';
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res) => {
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({
       status: 'error',

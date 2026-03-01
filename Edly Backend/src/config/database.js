@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { logger } from '#utils/logger.js';
 
 const connectDb = async () => {
   try {
@@ -7,19 +8,19 @@ const connectDb = async () => {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
     });
-    console.log('MongoDB connected');
+    logger.info('MongoDB connected');
   } catch (error) {
-    console.error('MongoDB connection error:', error);
+    logger.error('MongoDB connection error:', error);
     process.exit(1);
   }
 };
 
 mongoose.connection.on('disconnected', () => {
-  console.log('MongoDB disconnected');
+  logger.info('MongoDB disconnected');
 });
 
 mongoose.connection.on('error', (err) => {
-  console.error('MongoDB error:', err);
+  logger.error('MongoDB error:', err);
 });
 
 export default connectDb;

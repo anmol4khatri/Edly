@@ -1,9 +1,6 @@
 import Enrollment from '#models/Enrollment.js';
 import Course from '#models/Course.js';
 import Module from '#models/Module.js';
-import Lesson from '#models/Lesson.js';
-import Pdf from '#models/Pdf.js';
-import Quiz from '#models/Quiz.js';
 import { NotFoundError, ConflictError, ForbiddenError } from '#utils/errors.js';
 
 class EnrollmentService {

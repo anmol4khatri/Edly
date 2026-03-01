@@ -11,7 +11,7 @@ const requireAuth = async (req, res, next) => {
     }
 
     const decodedMsg = await jwt.verify(token, process.env.JWT_SECRET);
-    const { id, tenantId, role } = decodedMsg;
+    const { id, tenantId } = decodedMsg;
 
     // Verify token matches current tenant context
     if (tenantId !== req.tenant._id.toString()) {
@@ -25,7 +25,7 @@ const requireAuth = async (req, res, next) => {
 
     req.user = user;
     next();
-  } catch (err) {
+  } catch {
     return next(new UnauthorizedError('Invalid Token'));
   }
 };

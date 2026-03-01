@@ -8,7 +8,7 @@ import compression from 'compression';
 
 import connectDb from '#config/database.js';
 import errorHandler from '#middlewares/errorMiddleware.js';
-import { requestLogger } from '#utils/logger.js';
+import { requestLogger, logger } from '#utils/logger.js';
 
 // Routes
 import authRoutes from '#routes/authRoutes.js';
@@ -68,10 +68,10 @@ const startServer = async () => {
     await connectDb();
     const port = process.env.PORT || 3000;
     app.listen(port, () => {
-      console.log('Server is running at PORT: ' + port);
+      logger.info('Server is running at PORT: ' + port);
     });
   } catch (err) {
-    console.error('Failed to start server:', err);
+    logger.error('Failed to start server:', err);
     process.exit(1);
   }
 };
