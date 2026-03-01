@@ -12,11 +12,11 @@
   "lint-staged": {
     "Edly Frontend/**/*.{js,jsx}": [
       "prettier --write",
-      "cd Edly Frontend && npm run lint"
+      "npm --prefix \"Edly Frontend\" run lint --"
     ],
     "Edly Backend/**/*.js": [
       "prettier --write",
-      "cd Edly Backend && npm run lint"
+      "npm --prefix \"Edly Backend\" run lint --"
     ]
   },
   "repository": {
