@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:staged": "eslint --fix",
     "preview": "vite preview"
   },
   "dependencies": {

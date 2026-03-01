@@ -7,10 +7,14 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint:frontend": "npm --prefix \"Edly Frontend\" run lint:staged --",
+    "lint:backend": "npm --prefix \"Edly Backend\" run lint:staged --"
   },
   "lint-staged": {
-    "*": "prettier --write --ignore-unknown"
+    "*": "prettier --write --ignore-unknown",
+    "Edly Frontend/**/*.{js,jsx}": "npm run lint:frontend --",
+    "Edly Backend/**/*.js": "npm run lint:backend --"
   },
   "repository": {
     "type": "git",

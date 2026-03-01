@@ -19,6 +19,7 @@
     "reset": "node scripts/reset_db.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:staged": "eslint --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
