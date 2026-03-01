@@ -1,10 +1,12 @@
 import js from "@eslint/js";
 import globals from "globals";
 import react from "eslint-plugin-react";
+import prettier from "eslint-config-prettier";
 
 export default [
   js.configs.recommended,
-
+  prettier,
+  
   {
     files: ["**/*.js", "**/*.jsx"],
     languageOptions: {
