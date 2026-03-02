@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -10,13 +10,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { FileText, Download } from "lucide-react"
+} from '@/components/ui/dialog';
+import { FileText, Download } from 'lucide-react';
 
 const PdfDialog = ({ pdf }) => {
   const handleDownload = () => {
-    window.open(pdf.pdfUrl, "_blank")
-  }
+    window.open(pdf.pdfUrl, '_blank');
+  };
 
   return (
     <Dialog>
@@ -45,12 +45,17 @@ const PdfDialog = ({ pdf }) => {
           <DialogHeader>
             <DialogTitle className="text-white">{pdf.title}</DialogTitle>
             <DialogDescription className="text-gray-300">
-              This PDF contains important course material. You can download it to view the full content offline.
+              This PDF contains important course material. You can download it to view the full
+              content offline.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <Button type="button" variant="default" className="bg-white/10 text-white hover:text-white hover:bg-white/20">
+              <Button
+                type="button"
+                variant="default"
+                className="bg-white/10 text-white hover:text-white hover:bg-white/20"
+              >
                 Cancel
               </Button>
             </DialogClose>
@@ -62,7 +67,7 @@ const PdfDialog = ({ pdf }) => {
         </div>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default PdfDialog
+export default PdfDialog;

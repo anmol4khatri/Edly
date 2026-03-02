@@ -1,4 +1,4 @@
-import { LoginForm } from "../login-form";
+import { LoginForm } from '../login-form';
 
 const LoginEducator = () => {
   return (
@@ -8,11 +8,11 @@ const LoginEducator = () => {
       </a>
       <div className="flex flex-1 items-center justify-center">
         <div className="w-full max-w-xs">
-          <LoginForm role={"educator"} />
+          <LoginForm role={'educator'} />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LoginEducator;

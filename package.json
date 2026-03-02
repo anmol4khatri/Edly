@@ -1,0 +1,38 @@
+{
+  "name": "edly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "lint:frontend": "npm --prefix \"Edly Frontend\" run lint:staged --",
+    "lint:backend": "npm --prefix \"Edly Backend\" run lint:staged --"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown",
+    "Edly Frontend/**/*.{js,jsx}": "npm run lint:frontend --",
+    "Edly Backend/**/*.js": "npm run lint:backend --"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anmol4khatri/Edly.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/anmol4khatri/Edly/issues"
+  },
+  "homepage": "https://github.com/anmol4khatri/Edly#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.1",
+    "prettier": "^3.8.1"
+  }
+}

@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,34 +7,34 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+} from '@/components/ui/navigation-menu';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "/", label: "Home" },
+  { href: '/', label: 'Home' },
   {
-    label: "View",
+    label: 'View',
     submenu: true,
-    type: "description",
+    type: 'description',
     items: [
       {
-        href: "/enrolled",
-        label: "Enrolled Courses",
-        description: "View all the courses you are enrolled in",
+        href: '/enrolled',
+        label: 'Enrolled Courses',
+        description: 'View all the courses you are enrolled in',
       },
       {
-        href: "/browse",
-        label: "Available Courses",
-        description: "Browse all the available courses",
+        href: '/browse',
+        label: 'Available Courses',
+        description: 'Browse all the available courses',
       },
     ],
   },
-]
+];
 
-const Header = ()  => {
+const Header = () => {
   return (
-    (<header className="border-b px-4 py-2 md:px-6 2xl:px-50">
+    <header className="border-b px-4 py-2 md:px-6 2xl:px-50">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -52,16 +52,20 @@ const Header = ()  => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  xmlns="http://www.w3.org/2000/svg">
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M4 12L20 12"
-                    className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]" />
+                    className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
+                  />
                   <path
                     d="M4 12H20"
-                    className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45" />
+                    className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
+                  />
                   <path
                     d="M4 12H20"
-                    className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]" />
+                    className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
+                  />
                 </svg>
               </Button>
             </PopoverTrigger>
@@ -72,7 +76,9 @@ const Header = ()  => {
                     <NavigationMenuItem key={index} className="w-full">
                       {link.submenu ? (
                         <>
-                          <div className=" text-muted-foreground px-2 py-1.5 text-xs font-medium">{link.label}</div>
+                          <div className=" text-muted-foreground px-2 py-1.5 text-xs font-medium">
+                            {link.label}
+                          </div>
                           <ul>
                             {link.items.map((item, itemIndex) => (
                               <li key={itemIndex}>
@@ -101,7 +107,8 @@ const Header = ()  => {
                           <div
                             role="separator"
                             aria-orientation="horizontal"
-                            className="bg-border -mx-1 my-1 h-px w-full" />
+                            className="bg-border -mx-1 my-1 h-px w-full"
+                          />
                         )}
                     </NavigationMenuItem>
                   ))}
@@ -111,7 +118,7 @@ const Header = ()  => {
           </Popover>
           {/* Logo */}
           <a href="/" className="text-primary hover:text-primary/90 w-30">
-            <img src="/edly.png" alt="logo"/>
+            <img src="/edly.png" alt="logo" />
           </a>
         </div>
         {/* Right side */}
@@ -123,21 +130,21 @@ const Header = ()  => {
                 <NavigationMenuItem key={index}>
                   {link.submenu ? (
                     <>
-                      <NavigationMenuTrigger
-                        className=" text-lg text-card-foreground hover:text-primary bg-transparent px-2 py-1.5 font-medium *:[svg]:-me-0.5 *:[svg]:size-3.5">
+                      <NavigationMenuTrigger className=" text-lg text-card-foreground hover:text-primary bg-transparent px-2 py-1.5 font-medium *:[svg]:-me-0.5 *:[svg]:size-3.5">
                         {link.label}
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent
-                        className="data-[motion=from-end]:slide-in-from-left-16! data-[motion=from-start]:slide-in-from-right-16! data-[motion=to-end]:slide-out-to-left-16! data-[motion=to-start]:slide-out-to-right-16! z-50 p-1">
-                        <ul className={cn(link.type === "description" ? "min-w-64" : "min-w-48")}>
+                      <NavigationMenuContent className="data-[motion=from-end]:slide-in-from-left-16! data-[motion=from-start]:slide-in-from-right-16! data-[motion=to-end]:slide-out-to-left-16! data-[motion=to-start]:slide-out-to-right-16! z-50 p-1">
+                        <ul className={cn(link.type === 'description' ? 'min-w-64' : 'min-w-48')}>
                           {link.items.map((item, itemIndex) => (
                             <li key={itemIndex}>
                               <NavigationMenuLink href={item.href} className="py-1.5">
                                 {/* Display label with description if present */}
-                                {link.type === "description" && "description" in item ? (
+                                {link.type === 'description' && 'description' in item ? (
                                   <div className="space-y-1">
                                     <div className="font-medium">{item.label}</div>
-                                    <p className="text-muted-foreground line-clamp-2 text-xs">{item.description}</p>
+                                    <p className="text-muted-foreground line-clamp-2 text-xs">
+                                      {item.description}
+                                    </p>
                                   </div>
                                 ) : (
                                   <span>{item.label}</span>
@@ -151,7 +158,8 @@ const Header = ()  => {
                   ) : (
                     <NavigationMenuLink
                       href={link.href}
-                      className="text-lg text-card-foreground hover:text-primary py-1.5 font-medium">
+                      className="text-lg text-card-foreground hover:text-primary py-1.5 font-medium"
+                    >
                       {link.label}
                     </NavigationMenuLink>
                   )}
@@ -167,7 +175,7 @@ const Header = ()  => {
           </div>
         </div>
       </div>
-    </header>)
+    </header>
   );
-}
+};
 export default Header;

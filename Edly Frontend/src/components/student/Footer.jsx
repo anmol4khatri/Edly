@@ -1,58 +1,58 @@
-import React from "react";
+import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 
 const defaultSections = [
   {
-    title: "Product",
+    title: 'Product',
     links: [
-      { name: "Overview", href: "#" },
-      { name: "Pricing", href: "#" },
-      { name: "Marketplace", href: "#" },
-      { name: "Features", href: "#" },
+      { name: 'Overview', href: '#' },
+      { name: 'Pricing', href: '#' },
+      { name: 'Marketplace', href: '#' },
+      { name: 'Features', href: '#' },
     ],
   },
   {
-    title: "Company",
+    title: 'Company',
     links: [
-      { name: "About", href: "#" },
-      { name: "Team", href: "#" },
-      { name: "Blog", href: "#" },
-      { name: "Careers", href: "#" },
+      { name: 'About', href: '#' },
+      { name: 'Team', href: '#' },
+      { name: 'Blog', href: '#' },
+      { name: 'Careers', href: '#' },
     ],
   },
   {
-    title: "Resources",
+    title: 'Resources',
     links: [
-      { name: "Help", href: "#" },
-      { name: "Sales", href: "#" },
-      { name: "Advertise", href: "#" },
-      { name: "Privacy", href: "#" },
+      { name: 'Help', href: '#' },
+      { name: 'Sales', href: '#' },
+      { name: 'Advertise', href: '#' },
+      { name: 'Privacy', href: '#' },
     ],
   },
 ];
 
 const defaultSocialLinks = [
-  { icon: <Instagram className="size-5" />, href: "#", label: "Instagram" },
-  { icon: <Facebook className="size-5" />, href: "#", label: "Facebook" },
-  { icon: <Twitter className="size-5" />, href: "#", label: "Twitter" },
-  { icon: <Linkedin className="size-5" />, href: "#", label: "LinkedIn" },
+  { icon: <Instagram className="size-5" />, href: '#', label: 'Instagram' },
+  { icon: <Facebook className="size-5" />, href: '#', label: 'Facebook' },
+  { icon: <Twitter className="size-5" />, href: '#', label: 'Twitter' },
+  { icon: <Linkedin className="size-5" />, href: '#', label: 'LinkedIn' },
 ];
 
 const defaultLegalLinks = [
-  { name: "Terms and Conditions", href: "#" },
-  { name: "Privacy Policy", href: "#" },
+  { name: 'Terms and Conditions', href: '#' },
+  { name: 'Privacy Policy', href: '#' },
 ];
 
 const Footer = ({
   logo = {
-    url: "/",
-    src: "/edly.png",
-    alt: "logo",
+    url: '/',
+    src: '/edly.png',
+    alt: 'logo',
   },
   sections = defaultSections,
-  description = "Learn today, lead tomorrow.",
+  description = 'Learn today, lead tomorrow.',
   socialLinks = defaultSocialLinks,
-  copyright = "© 2025 edly. All rights reserved.",
+  copyright = '© 2025 edly. All rights reserved.',
   legalLinks = defaultLegalLinks,
 }) => {
   return (
@@ -62,17 +62,11 @@ const Footer = ({
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
             {/* Logo */}
             <div className="flex items-center gap-2 lg:justify-start">
-              <a href={logo.url} >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-20 -ml-5 w-48"
-                />
+              <a href={logo.url}>
+                <img src={logo.src} alt={logo.alt} className="h-20 -ml-5 w-48" />
               </a>
             </div>
-            <p className="text-muted-foreground max-w-[70%] text-sm">
-              {description}
-            </p>
+            <p className="text-muted-foreground max-w-[70%] text-sm">{description}</p>
             <ul className="text-muted-foreground flex items-center space-x-6">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="hover:text-primary font-medium">
@@ -90,10 +84,7 @@ const Footer = ({
                 <h3 className="mb-4 font-bold">{section.title}</h3>
                 <ul className="text-muted-foreground space-y-3 text-sm">
                   {section.links.map((link, linkIdx) => (
-                    <li
-                      key={linkIdx}
-                      className="hover:text-primary font-medium"
-                    >
+                    <li key={linkIdx} className="hover:text-primary font-medium">
                       <a href={link.href}>{link.name}</a>
                     </li>
                   ))}
