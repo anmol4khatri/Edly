@@ -1,4 +1,4 @@
-import VideoAccordion from '../VideoAccordion';
+import VideoAccordion from '@/features/courses/components/VideoAccordion';
 
 const ContinueWatching = () => {
   return (

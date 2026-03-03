@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardDescription, CardTitle, CardFooter } from '@/components/ui/card';
-import RatingDisplay from './RatingDisplay';
+import RatingDisplay from '@/features/courses/components/RatingDisplay';
 import { Globe } from 'lucide-react';
 import { Clock9 } from 'lucide-react';
 

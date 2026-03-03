@@ -1,6 +1,6 @@
-import { LoginForm } from '../login-form';
+import { LoginForm } from '@/features/auth/components/login-form';
 
-const LoginStudent = () => {
+const LoginEducator = () => {
   return (
     <div className="flex flex-col gap-4 p-6 md:p-10 min-h-screen dark bg-background text-foreground">
       <a href="#" className="w-30">
@@ -8,11 +8,11 @@ const LoginStudent = () => {
       </a>
       <div className="flex flex-1 items-center justify-center">
         <div className="w-full max-w-xs">
-          <LoginForm role={'student'} />
+          <LoginForm role={'educator'} />
         </div>
       </div>
     </div>
   );
 };
 
-export default LoginStudent;
+export default LoginEducator;

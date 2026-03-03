@@ -1,5 +1,5 @@
-import { OnboardingForm } from '@/components/onboarding-form-template';
-import Timeline from './Timeline';
+import { OnboardingForm } from '@/features/auth/components/onboarding-form-template';
+import Timeline from '@/features/educator/components/Timeline';
 
 const OnboardingPage = () => {
   return (

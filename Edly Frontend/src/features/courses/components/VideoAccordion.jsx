@@ -8,8 +8,8 @@ import {
 } from '@/components/ui/accordion';
 import { Play, FileText, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
-import QuizRulesDialog from './quizDialog';
-import PdfDialog from './pdfDialog';
+import QuizRulesDialog from '@/components/common/quizDialog';
+import PdfDialog from '@/components/common/pdfDialog';
 
 const modules = [
   {

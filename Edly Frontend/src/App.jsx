@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Body from './components/Body';
-import BrowseCourses from './components/student/BrowseCourses';
-import EnrolledCourses from './components/student/EnrolledCourses';
-import CoursePage from './components/student/CoursePage';
-import SignupEducator from './components/eduator/SignupEducator';
-import LoginEducator from './components/eduator/LoginEducator';
-import LoginStudent from './components/student/LoginStudent';
-import SignupStudent from './components/student/SignupEducator';
-import OnboardingPage from './components/eduator/OnboardingPage';
-import ContinueWatching from './components/student/ContinueWatching';
-import QuizPage from './components/student/QuizPage';
+import Body from '@/components/layouts/Body';
+import BrowseCourses from '@/features/student/components/BrowseCourses';
+import EnrolledCourses from '@/features/student/components/EnrolledCourses';
+import CoursePage from '@/features/student/components/CoursePage';
+import SignupEducator from '@/features/educator/components/SignupEducator';
+import LoginEducator from '@/features/educator/components/LoginEducator';
+import LoginStudent from '@/features/student/components/LoginStudent';
+import SignupStudent from '@/features/student/components/SignupEducator'; // Note: Keeping file name as is for now to avoid breaking changes, but moved folder
+import OnboardingPage from '@/features/educator/components/OnboardingPage';
+import ContinueWatching from '@/features/student/components/ContinueWatching';
+import QuizPage from '@/features/student/components/QuizPage';
 
 const App = () => {
   return (

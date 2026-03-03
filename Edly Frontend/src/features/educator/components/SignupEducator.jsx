@@ -1,5 +1,5 @@
-import { CreateAccountForm } from '@/components/create-account-form';
-import Timeline from './Timeline';
+import { CreateAccountForm } from '@/features/auth/components/create-account-form';
+import Timeline from '@/features/educator/components/Timeline';
 
 const SignupEducator = () => {
   return (

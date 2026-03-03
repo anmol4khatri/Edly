@@ -1,4 +1,4 @@
-import { CreateAccountForm } from '@/components/create-account-form';
+import { CreateAccountForm } from '@/features/auth/components/create-account-form';
 
 const SignupStudent = () => {
   return (

@@ -1,4 +1,4 @@
-import CourseCard from '../CourseCard';
+import CourseCard from '@/features/courses/components/CourseCard';
 
 const EnrolledCourses = () => {
   return (

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import CourseHero from '../CourseHero';
-import CourseHighlights from '../CourseHighlights';
-import CourseBanner from '../CourseBanner';
-import CourseAccordion from '../CourseAccordion';
-import CourseReview from '../CourseReview';
-import CourseRating from '../CourseRating';
+import CourseHero from '@/features/courses/components/CourseHero';
+import CourseHighlights from '@/features/courses/components/CourseHighlights';
+import CourseBanner from '@/features/courses/components/CourseBanner';
+import CourseAccordion from '@/features/courses/components/CourseAccordion';
+import CourseReview from '@/features/courses/components/CourseReview';
+import CourseRating from '@/features/courses/components/CourseRating';
 
 const CoursePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
