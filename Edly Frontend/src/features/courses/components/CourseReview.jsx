@@ -79,52 +79,39 @@ const sampleCourseReviews = [
   },
 ];
 
+const renderStars = (rating) => {
+  return Array.from({ length: 5 }, (_, i) => (
+    <Star key={i} className={`icon-md stroke-0 ${i < rating ? 'star-filled' : 'star-empty'}`} />
+  ));
+};
+
 export default function Component() {
   const [courseReviews] = useState(sampleCourseReviews);
-
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`size-5 stroke-0 ${i < rating ? 'fill-amber-400' : 'fill-muted-foreground'}`}
-      />
-    ));
-  };
-
-  const renderMobileStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`w-4 h-4 ${i < rating ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-600 text-gray-600'}`}
-      />
-    ));
-  };
 
   return (
     <>
       {/* Desktop Masonry Grid */}
-      <div className="hidden md:block px-2 py-6 w-8/12 mb-10">
-        {/* Header */}
-        <div className="mb-4 max-sm:hidden">
-          <h1 className="text-2xl font-bold text-white mb-2">Recent Reviews</h1>
+      <div className="hidden md:block py-6 w-full lg:w-8/12 mb-10">
+        <div className="mb-4">
+          <h2 className="heading-2 mb-2">Recent Reviews</h2>
         </div>
         <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
           {courseReviews.map((courseReview, index) => (
             <Card key={index} className="break-inside-avoid mb-4">
               <CardHeader>
-                <CardTitle className="text-white">
-                  {courseReview.name}{' '}
-                  <span className="text-muted-foreground font-medium ml-1">
+                <CardTitle>
+                  {courseReview.name}
+                  <span className="text-muted-foreground font-medium ml-2 body-small">
                     {courseReview.time}
                   </span>
                 </CardTitle>
-                <div className="flex mt-1 items-center">
-                  {renderStars(courseReview.rating)}
-                  <Badge className="bg-gray-700 mx-2 text-white">{courseReview.rating}/5</Badge>
+                <div className="flex mt-1 items-center gap-2">
+                  <div className="flex">{renderStars(courseReview.rating)}</div>
+                  <Badge variant="secondary">{courseReview.rating}/5</Badge>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300">{courseReview.content}</p>
+                <p className="text-muted-foreground body-default">{courseReview.content}</p>
               </CardContent>
             </Card>
           ))}
@@ -132,51 +119,39 @@ export default function Component() {
       </div>
 
       {/* Mobile Feed Layout */}
-      <div className="md:hidden bg-transparent min-h-screen pb-10">
-        <div className="max-w-2xl mx-20 max-sm:w-full max-sm:mx-0">
+      <div className="md:hidden pb-10">
+        <div className="max-w-2xl mx-auto">
           {/* Header */}
-          <div className="sticky top-0 backdrop-blur-md border-b border-gray-800 p-4">
-            <h1 className="text-xl font-bold text-white">Recent Reviews</h1>
+          <div className="sticky top-0 bg-background/95 backdrop-blur-sm border-b border-border p-4 z-10">
+            <h2 className="heading-3">Recent Reviews</h2>
           </div>
 
           {/* Reviews Feed */}
-          <div className="divide-y divide-gray-800">
+          <div className="divide-y divide-border">
             {courseReviews.map((courseReview) => (
-              <Card
-                key={courseReview.id}
-                className="bg-black border-gray-800 rounded-none border-x-0 border-t-0"
-              >
+              <Card key={courseReview.id} className="bg-transparent border-none rounded-none">
                 <CardContent className="p-4">
-                  <div className="flex">
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      {/* User Info & Rating */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <div className="flex items-center space-x-1">
-                            <span className="font-bold text-white hover:underline cursor-pointer">
-                              {courseReview.name}
-                            </span>
-                          </div>
-                          <span className="text-gray-400">{courseReview.time}</span>
-                        </div>
-                      </div>
-
-                      {/* Rating */}
-                      <div className="flex items-center space-x-2 mt-1">
-                        <div className="flex space-x-0.5">
-                          {renderMobileStars(courseReview.rating)}
-                        </div>
-                        <Badge variant="secondary" className="bg-gray-800 text-gray-300 text-xs">
-                          {courseReview.rating}/5
-                        </Badge>
-                      </div>
-
-                      {/* Review Content */}
-                      <div className="mt-3">
-                        <p className="text-white text-[15px] leading-5">{courseReview.content}</p>
+                  <div className="flex flex-col gap-2">
+                    {/* User Info */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold">{courseReview.name}</span>
+                        <span className="text-muted-foreground body-small">
+                          {courseReview.time}
+                        </span>
                       </div>
                     </div>
+
+                    {/* Rating */}
+                    <div className="flex items-center gap-2">
+                      <div className="flex">{renderStars(courseReview.rating)}</div>
+                      <Badge variant="secondary" className="body-small">
+                        {courseReview.rating}/5
+                      </Badge>
+                    </div>
+
+                    {/* Review Content */}
+                    <p className="body-default mt-1">{courseReview.content}</p>
                   </div>
                 </CardContent>
               </Card>

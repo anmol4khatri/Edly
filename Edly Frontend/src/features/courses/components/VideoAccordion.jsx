@@ -167,11 +167,11 @@ const modules = [
 const getContentIcon = (type) => {
   switch (type) {
     case 'lesson':
-      return <Play className="w-5 h-5 text-blue-500" />;
+      return <Play className="icon-md icon-lesson" />;
     case 'pdf':
-      return <FileText className="w-5 h-5 text-red-500" />;
+      return <FileText className="icon-md icon-pdf" />;
     case 'quiz':
-      return <HelpCircle className="w-5 h-5 text-green-500" />;
+      return <HelpCircle className="icon-md icon-quiz" />;
     default:
       return null;
   }
@@ -193,11 +193,11 @@ const VideoAccordion = () => {
           <AccordionItem
             key={module._id}
             value={`item-${index + 1}`}
-            className="data-[state=open]:bg-card rounded-md border-none px-5 transition-colors duration-200"
+            className="data-[state=open]:bg-card rounded-lg border-none px-4 transition-colors duration-200"
           >
-            <AccordionTrigger className="text-lg">{module.title}</AccordionTrigger>
-            <AccordionContent className="text-muted-foreground text-base">
-              <div className="space-y-3 mt-4">
+            <AccordionTrigger className="heading-4">{module.title}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground body-default">
+              <div className="space-y-2 mt-4">
                 {module.content.map((item) => {
                   if (item.type === 'quiz') {
                     return <QuizRulesDialog key={item.data._id} quiz={item.data} />;
@@ -211,10 +211,10 @@ const VideoAccordion = () => {
                     <div
                       key={item.data._id}
                       onClick={() => handleContentClick(item)}
-                      className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer max-sm:text-base ${
+                      className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                         currentPlayingVideo === item.data._id && item.type === 'lesson'
-                          ? 'bg-white text-gray-900 shadow-sm'
-                          : 'hover:bg-white/10 text-foreground'
+                          ? 'bg-primary/10 text-foreground shadow-sm'
+                          : 'hover:bg-accent/50 text-foreground'
                       }`}
                     >
                       {getContentIcon(item.type)}
@@ -222,9 +222,7 @@ const VideoAccordion = () => {
                         <h4 className="font-medium">{item.data.title}</h4>
                       </div>
                       {item.type === 'lesson' && (
-                        <span className="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded">
-                          Video
-                        </span>
+                        <span className="body-small badge-lesson px-2 py-1 rounded-md">Video</span>
                       )}
                     </div>
                   );

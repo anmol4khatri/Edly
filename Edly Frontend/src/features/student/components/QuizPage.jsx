@@ -66,16 +66,12 @@ const QuizPage = () => {
   };
 
   return (
-    <div className="min-h-screen dark bg-background px-16 py-10 text-white">
+    <div className="min-h-screen bg-background container-padding py-10 text-foreground">
       <div className="">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
-          <h1 className="text-2xl sm:text-3xl font-bold">Advanced Docker Concepts Quiz</h1>
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-blue-700 text-white px-8"
-            onClick={handleSubmit}
-          >
+          <h1 className="heading-1">Advanced Docker Concepts Quiz</h1>
+          <Button size="lg" className="px-8" onClick={handleSubmit}>
             Submit Quiz
           </Button>
         </div>
@@ -83,24 +79,21 @@ const QuizPage = () => {
         {/* Progress Section */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <span className="text-lg font-medium">
+            <span className="heading-4">
               Question {currentQuestion} of {totalQuestions}
             </span>
-            <Badge
-              variant="secondary"
-              className="bg-slate-800 text-white border-slate-700 px-4 py-2 text-base"
-            >
-              <Clock className="w-5 h-5 mr-2" />
+            <Badge variant="secondary" className="px-4 py-2 text-base">
+              <Clock className="icon-md mr-2" />
               {timeRemaining}
             </Badge>
           </div>
-          <Progress value={progress} className="h-3 bg-slate-800 [&>div]:bg-primary" />
+          <Progress value={progress} className="h-3 bg-muted" />
         </div>
 
         {/* Question Card */}
-        <Card className="mb-8 bg-slate-900 border-slate-700">
+        <Card className="mb-8">
           <CardHeader>
-            <CardTitle className="text-xl sm:text-xl leading-relaxed text-white">
+            <CardTitle className="text-xl sm:text-xl leading-relaxed">
               Why is Docker Lorem ipsum dolor sit amet consectetur adipisicing elit.considered
               essential for modern application development and deployment?
             </CardTitle>
@@ -113,10 +106,10 @@ const QuizPage = () => {
             <Card
               key={option.id}
               className={cn(
-                'cursor-pointer transition-all duration-200 border-2 bg-card',
+                'cursor-pointer transition-all duration-200 border-2',
                 selectedOption === option.id
-                  ? 'border-blue-500 bg-primary/20 shadow-lg shadow-blue-500/20'
-                  : 'border-slate-700 hover:border-slate-600 hover:bg-slate-800'
+                  ? 'border-primary bg-primary/20 shadow-lg shadow-primary/20'
+                  : 'border-border hover:border-muted-foreground hover:bg-accent'
               )}
               onClick={() => handleOptionSelect(option.id)}
             >
@@ -126,13 +119,13 @@ const QuizPage = () => {
                     className={cn(
                       'text-lg font-bold min-w-[40px] h-10 flex items-center justify-center rounded-full',
                       selectedOption === option.id
-                        ? 'bg-primary text-white'
-                        : 'bg-slate-700 text-slate-300'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-muted-foreground'
                     )}
                   >
                     {option.label}
                   </Badge>
-                  <p className="text-base leading-relaxed text-slate-200 flex-1">{option.text}</p>
+                  <p className="body-default text-muted-foreground flex-1">{option.text}</p>
                 </div>
               </CardContent>
             </Card>
@@ -151,8 +144,8 @@ const QuizPage = () => {
                   i + 1 === currentQuestion
                     ? 'bg-primary'
                     : i + 1 < currentQuestion
-                      ? 'bg-blue-600'
-                      : 'bg-slate-700'
+                      ? 'bg-primary/70'
+                      : 'bg-muted'
                 )}
               />
             ))}
@@ -160,10 +153,9 @@ const QuizPage = () => {
           <Button
             onClick={handleNext}
             disabled={currentQuestion === totalQuestions || !selectedOption}
-            className="bg-primary hover:bg-blue-700 disabled:bg-slate-700"
           >
             Next
-            <ChevronRight className="w-4 h-4 ml-2" />
+            <ChevronRight className="icon-sm ml-2" />
           </Button>
         </div>
       </div>

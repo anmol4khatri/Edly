@@ -49,7 +49,7 @@ const CoursePage = () => {
       </div>
 
       {/* Desktop Layout - Original Structure */}
-      <div className="hidden lg:block px-16 py-3 relative 2xl:px-50">
+      <div className="hidden lg:block container-padding py-3 relative">
         <div className="w-full">
           <CourseHero />
           <CourseHighlights />

@@ -49,7 +49,7 @@ export function OnboardingForm({ className, ...props }) {
   return (
     <form className={cn('flex flex-col gap-6', className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">Complete Your Profile</h1>
+        <h1 className="heading-2">Complete Your Profile</h1>
         <p className="text-balance text-sm text-muted-foreground">
           Tell us about yourself and your organization to get started
         </p>
@@ -57,7 +57,7 @@ export function OnboardingForm({ className, ...props }) {
       <div className="grid gap-6">
         {/* Personal Information */}
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Personal Information</h3>
+          <h3 className="heading-4">Personal Information</h3>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
@@ -90,7 +90,7 @@ export function OnboardingForm({ className, ...props }) {
                 onClick={addQualification}
                 className="h-8 bg-transparent"
               >
-                <Plus className="h-4 w-4 mr-1" />
+                <Plus className="icon-sm mr-1" />
                 Add
               </Button>
             </div>
@@ -110,7 +110,7 @@ export function OnboardingForm({ className, ...props }) {
                       onClick={() => removeQualification(index)}
                       className="h-10 w-10 p-0"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="icon-sm" />
                     </Button>
                   )}
                 </div>
@@ -121,7 +121,7 @@ export function OnboardingForm({ className, ...props }) {
 
         {/* Organization Information */}
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Organization Information</h3>
+          <h3 className="heading-4">Organization Information</h3>
 
           <div className="grid gap-2">
             <Label htmlFor="orgName">Organization Name</Label>
@@ -151,7 +151,7 @@ export function OnboardingForm({ className, ...props }) {
                     />
                   ) : (
                     <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                      <Upload className="h-8 w-8" />
+                      <Upload className="icon-lg" />
                       <span className="text-sm">Click to upload logo</span>
                     </div>
                   )}
@@ -171,7 +171,9 @@ export function OnboardingForm({ className, ...props }) {
                   setSubdomain(e.target.value.toLowerCase().replace(/[^a-zA-Z0-9-]/g, ''))
                 }
                 className={cn(
-                  subdomain && !isSubdomainValid && 'border-red-500 focus-visible:ring-red-500'
+                  subdomain &&
+                    !isSubdomainValid &&
+                    'border-destructive focus-visible:ring-destructive'
                 )}
               />
               <span className="text-sm text-muted-foreground whitespace-nowrap">.edly.com</span>
@@ -180,10 +182,10 @@ export function OnboardingForm({ className, ...props }) {
               <div
                 className={cn(
                   'flex items-center gap-2 text-sm mt-1',
-                  isSubdomainValid ? 'text-green-600' : 'text-red-500'
+                  isSubdomainValid ? 'text-success' : 'text-destructive'
                 )}
               >
-                <Building className="h-3 w-3" />
+                <Building className="icon-xs" />
                 <span>
                   {isSubdomainValid
                     ? `${subdomain}.yourapp.com is available`

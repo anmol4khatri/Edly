@@ -3,7 +3,7 @@ import Timeline from '@/features/educator/components/Timeline';
 
 const SignupEducator = () => {
   return (
-    <div className="grid lg:grid-cols-2 min-h-screen dark bg-background text-foreground">
+    <div className="grid lg:grid-cols-2 min-h-screen bg-background text-foreground">
       {/* Left div */}
       <div className="hidden lg:block bg-card">
         <Timeline step={1} />

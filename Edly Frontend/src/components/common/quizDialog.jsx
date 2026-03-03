@@ -36,25 +36,23 @@ const QuizRulesDialog = ({ quiz }) => {
       }}
     >
       <DialogTrigger asChild>
-        <div
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer max-sm:text-base hover:bg-white/10 text-foreground`}
-        >
-          <HelpCircle className="w-5 h-5 text-green-500" />
+        <div className="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer max-sm:text-base hover:bg-accent text-foreground">
+          <HelpCircle className="icon-md icon-quiz" />
           <div className="flex-1">
             <h4 className="font-medium">{quiz.title}</h4>
           </div>
-          <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded">Quiz</span>
+          <span className="badge-quiz">Quiz</span>
         </div>
       </DialogTrigger>
-      <DialogContent className="flex flex-col gap-0 p-0 sm:max-h-[min(640px,80vh)] sm:max-w-lg [&>button:last-child]:top-3.5 bg-[#17181C] border-gray-700">
+      <DialogContent className="flex flex-col gap-0 p-0 sm:max-h-[min(640px,80vh)] sm:max-w-lg [&>button:last-child]:top-3.5 bg-card border-border">
         <DialogHeader className="contents space-y-0 text-left">
-          <DialogTitle className="border-b border-gray-700 px-6 py-4 text-base text-white">
+          <DialogTitle className="border-b border-border px-6 py-4 text-base">
             Quiz Rules & Guidelines
           </DialogTitle>
           <div ref={contentRef} onScroll={handleScroll} className="overflow-y-auto">
             <DialogDescription asChild>
               <div className="px-6 py-4">
-                <div className="[&_strong]:text-white space-y-4 [&_strong]:font-semibold text-gray-300">
+                <div className="[&_strong]:text-foreground space-y-4 [&_strong]:font-semibold text-muted-foreground">
                   <div className="space-y-4">
                     <div className="space-y-1">
                       <p>
@@ -134,18 +132,14 @@ const QuizRulesDialog = ({ quiz }) => {
             </DialogDescription>
           </div>
         </DialogHeader>
-        <DialogFooter className="border-t border-gray-700 px-6 py-4 sm:items-center bg-[#17181C]">
+        <DialogFooter className="border-t border-border px-6 py-4 sm:items-center bg-card">
           {!hasReadToBottom && (
-            <span className="text-gray-400 grow text-xs max-sm:text-center">
+            <span className="text-muted-foreground grow text-xs max-sm:text-center">
               Read all rules before starting the quiz.
             </span>
           )}
           <DialogClose asChild>
-            <Button
-              type="button"
-              variant="default"
-              className="bg-white/10 text-white hover:text-white hover:bg-white/20"
-            >
+            <Button type="button" variant="secondary">
               Cancel
             </Button>
           </DialogClose>

@@ -159,48 +159,58 @@ const modules = [
   },
 ];
 
+const getContentIcon = (type) => {
+  switch (type) {
+    case 'lesson':
+      return <Play className="icon-md icon-lesson" />;
+    case 'pdf':
+      return <FileText className="icon-md icon-pdf" />;
+    case 'quiz':
+      return <HelpCircle className="icon-md icon-quiz" />;
+    default:
+      return null;
+  }
+};
+
 const CourseAccordion = () => {
   const handleItemClick = () => {
     // Handle item click logic here
   };
+
   return (
-    <div className="px-0 min-sm:py-5 w-8/12 space-y-5 mt-5 min-sm:mb-8 max-sm:px-0 max-sm:w-full max-sm:space-y-4 max-sm:mt-0">
-      <h3 className="text-2xl font-bold max-sm:text-xl">Comprehensive Course Modules</h3>
-      <Accordion type="single" collapsible className="-space-y-px w-12/12" defaultValue="3">
+    <div className="py-5 w-full lg:w-8/12 space-y-4 mt-5">
+      <h3 className="heading-2">Comprehensive Course Modules</h3>
+      <Accordion type="single" collapsible className="-space-y-px w-full" defaultValue="3">
         {modules.map((module) => (
           <AccordionItem
             value={module._id}
             key={module._id}
-            className="bg-card has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative border px-4 py-1 outline-none first:rounded-t-md last:rounded-b-md last:border-b has-focus-visible:z-10 has-focus-visible:ring-[3px]"
+            className="bg-card has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative border px-4 py-1 outline-none first:rounded-t-lg last:rounded-b-lg last:border-b has-focus-visible:z-10 has-focus-visible:ring-[3px]"
           >
-            <AccordionTrigger className="py-4 text-md leading-6 hover:no-underline focus-visible:ring-0 cursor-pointer">
+            <AccordionTrigger className="py-4 body-default font-medium leading-6 hover:no-underline focus-visible:ring-0 cursor-pointer">
               {module.title}
             </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground bg-[#2B2F37] p-5 m-2 rounded">
+            <AccordionContent className="text-muted-foreground bg-muted/50 p-4 m-2 rounded-md">
               {module.content.map((item) => (
                 <div
                   key={item.data._id}
-                  className="flex gap-3 p-1.5 w-full"
+                  className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-accent/50 cursor-pointer transition-colors"
                   onClick={() => handleItemClick()}
                 >
-                  <span className="text-primary">
-                    {item.type === 'lesson' ? (
-                      <Play className="w-5 h-5 text-blue-500" />
-                    ) : item.type === 'pdf' ? (
-                      <FileText className="w-5 h-5 text-red-500" />
-                    ) : (
-                      <HelpCircle className="w-5 h-5 text-green-500" />
-                    )}
-                  </span>
+                  {getContentIcon(item.type)}
                   {/* Content - Desktop View */}
-                  <span className="max-sm:hidden text-[16px] text-[#a3a4a6] w-full cursor-pointer flex justify-between">
-                    <span className="hover:text-white">{item.data.title}</span>
-                    <span className="">2 hours</span>
+                  <span className="hidden sm:flex body-default text-muted-foreground w-full justify-between">
+                    <span className="hover:text-foreground transition-colors">
+                      {item.data.title}
+                    </span>
+                    <span>2 hours</span>
                   </span>
                   {/* Content - Mobile View */}
-                  <span className="min-sm:hidden text-[16px] text-[#a3a4a6] w-full cursor-pointer">
-                    <span className="hover:text-white">{item.data.title}</span>
-                    <span className=""> | 2 hrs</span>
+                  <span className="sm:hidden body-small text-muted-foreground w-full">
+                    <span className="hover:text-foreground transition-colors">
+                      {item.data.title}
+                    </span>
+                    <span> | 2 hrs</span>
                   </span>
                 </div>
               ))}

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,6 +10,7 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Moon, Sun } from 'lucide-react';
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -33,8 +35,28 @@ const navigationLinks = [
 ];
 
 const Header = () => {
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme');
+      return saved ? saved === 'dark' : true;
+    }
+    return true;
+  });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark(!isDark);
+
   return (
-    <header className="border-b px-4 py-2 md:px-6 2xl:px-50">
+    <header className="border-b container-padding py-2">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -76,7 +98,7 @@ const Header = () => {
                     <NavigationMenuItem key={index} className="w-full">
                       {link.submenu ? (
                         <>
-                          <div className=" text-muted-foreground px-2 py-1.5 text-xs font-medium">
+                          <div className="text-muted-foreground px-2 py-1.5 text-xs font-medium">
                             {link.label}
                           </div>
                           <ul>
@@ -90,7 +112,7 @@ const Header = () => {
                           </ul>
                         </>
                       ) : (
-                        <NavigationMenuLink href={link.href} className="py-1.5 ">
+                        <NavigationMenuLink href={link.href} className="py-1.5">
                           {link.label}
                         </NavigationMenuLink>
                       )}
@@ -130,7 +152,7 @@ const Header = () => {
                 <NavigationMenuItem key={index}>
                   {link.submenu ? (
                     <>
-                      <NavigationMenuTrigger className=" text-lg text-card-foreground hover:text-primary bg-transparent px-2 py-1.5 font-medium *:[svg]:-me-0.5 *:[svg]:size-3.5">
+                      <NavigationMenuTrigger className="text-base text-card-foreground hover:text-primary bg-transparent px-2 py-1.5 font-medium *:[svg]:-me-0.5 *:[svg]:size-3.5">
                         {link.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="data-[motion=from-end]:slide-in-from-left-16! data-[motion=from-start]:slide-in-from-right-16! data-[motion=to-end]:slide-out-to-left-16! data-[motion=to-start]:slide-out-to-right-16! z-50 p-1">
@@ -158,7 +180,7 @@ const Header = () => {
                   ) : (
                     <NavigationMenuLink
                       href={link.href}
-                      className="text-lg text-card-foreground hover:text-primary py-1.5 font-medium"
+                      className="text-base text-card-foreground hover:text-primary py-1.5 font-medium"
                     >
                       {link.label}
                     </NavigationMenuLink>
@@ -167,9 +189,18 @@ const Header = () => {
               ))}
             </NavigationMenuList>
           </NavigationMenu>
-          {/* Auth buttons */}
+          {/* Theme toggle & Auth buttons */}
           <div className="flex items-center gap-2">
-            <Button asChild size="sm" className="text-md">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="size-9"
+              aria-label="Toggle theme"
+            >
+              {isDark ? <Sun className="icon-md" /> : <Moon className="icon-md" />}
+            </Button>
+            <Button asChild size="sm">
               <a href="#">Login</a>
             </Button>
           </div>
