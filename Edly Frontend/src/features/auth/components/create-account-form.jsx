@@ -59,8 +59,8 @@ export function CreateAccountForm({ className, ...props }) {
             required
           />
           {showValidation && password && (
-            <div className="mt-2 space-y-1 rounded-md border p-3 bg-muted/50">
-              <p className="text-sm font-medium text-muted-foreground mb-2">
+            <div className="mt-element space-y-1 rounded-md border p-3 bg-muted/50">
+              <p className="text-sm font-medium text-muted-foreground mb-element">
                 Password must contain:
               </p>
               <ValidationItem isValid={validation.minLength} text="At least 8 characters" />

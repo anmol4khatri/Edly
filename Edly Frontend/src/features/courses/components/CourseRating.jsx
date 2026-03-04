@@ -46,25 +46,25 @@ export default function CustomerReviews() {
   return (
     <div className="w-full lg:w-8/12 py-5">
       {/* Header */}
-      <div className="mb-4 max-sm:hidden">
-        <h2 className="heading-2 mb-2">Course Reviews</h2>
+      <div className="mb-element max-sm:hidden">
+        <h2 className="heading-2 mb-element">Course Reviews</h2>
         <p className="text-muted-foreground body-default">What our students are saying</p>
       </div>
 
       <div className="max-w-4xl">
         <Card className="max-sm:bg-transparent max-sm:border-none">
-          <CardContent className="p-6 text-center">
+          <CardContent className="card-padding text-center">
             {/* Header Mobile */}
-            <div className="mb-4 sm:hidden">
-              <h2 className="heading-2 mb-2">Course Reviews</h2>
+            <div className="mb-element sm:hidden">
+              <h2 className="heading-2 mb-element">Course Reviews</h2>
               <p className="text-muted-foreground body-default">What our students are saying</p>
             </div>
 
-            <div className="sm:flex sm:gap-10">
+            <div className="sm:flex sm:gap-8 md:gap-10">
               {/* Rating Display */}
-              <div className="mb-6">
-                <div className="text-5xl font-bold mb-2">4.7</div>
-                <div className="flex justify-center gap-1 mb-2">
+              <div className="mb-component">
+                <div className="text-5xl font-bold mb-element">4.7</div>
+                <div className="flex justify-center gap-1 mb-element">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star key={star} className="icon-lg star-filled" />
                   ))}
@@ -73,7 +73,7 @@ export default function CustomerReviews() {
               </div>
 
               {/* Rating Breakdown */}
-              <div className="mb-6 space-y-2 sm:flex-1">
+              <div className="mb-component space-y-2 sm:flex-1">
                 {reviewData.map((item) => (
                   <div key={item.stars} className="flex items-center gap-4">
                     <span className="text-muted-foreground body-small w-16 text-left">
@@ -99,12 +99,12 @@ export default function CustomerReviews() {
               </DialogTrigger>
               <DialogContent className="flex flex-col gap-0 p-0 [&>button:last-child]:top-3.5 bg-card border-border">
                 <DialogHeader className="contents space-y-0 text-left">
-                  <DialogTitle className="border-b border-border px-6 py-4 body-default font-semibold">
+                  <DialogTitle className="border-b border-border dialog-header-padding body-default font-semibold">
                     Write a Review
                   </DialogTitle>
                 </DialogHeader>
-                <div className="px-6 py-4">
-                  <form className="space-y-5">
+                <div className="dialog-body-padding">
+                  <form className="space-y-4">
                     <div className="space-y-4">
                       <fieldset className="space-y-4">
                         <legend className="heading-4">How would you rate this course?</legend>
@@ -129,12 +129,12 @@ export default function CustomerReviews() {
                           ))}
                         </div>
                       </fieldset>
-                      <div className="text-muted-foreground mt-2 flex justify-between body-small">
+                      <div className="text-muted-foreground mt-element flex justify-between body-small">
                         <span>Poor</span>
                         <span>Excellent</span>
                       </div>
 
-                      <div className="space-y-2 mt-6">
+                      <div className="space-y-2 mt-component">
                         <Label className="text-muted-foreground">
                           Why did you give this rating?
                         </Label>

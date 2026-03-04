@@ -36,9 +36,9 @@ const CoursePage = () => {
     <div className="min-h-screen bg-background">
       {/* Mobile Layout */}
       <div className="block lg:hidden">
-        <div className="px-4 py-0">
+        <div className="container-padding">
           <CourseHero />
-          <div className="">
+          <div>
             <CourseBanner />
           </div>
           <CourseHighlights />

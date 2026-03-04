@@ -181,7 +181,7 @@ export function OnboardingForm({ className, ...props }) {
             {subdomain && (
               <div
                 className={cn(
-                  'flex items-center gap-2 text-sm mt-1',
+                  'flex items-center gap-2 text-sm mt-element',
                   isSubdomainValid ? 'text-success' : 'text-destructive'
                 )}
               >

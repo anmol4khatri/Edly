@@ -21,7 +21,7 @@ const PdfDialog = ({ pdf }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer max-sm:text-base hover:bg-accent text-foreground">
+        <div className="content-item content-item-hover max-sm:text-base text-foreground">
           <FileText className="icon-md icon-pdf" />
           <div className="flex-1">
             <h4 className="font-medium">{pdf.title}</h4>
@@ -39,7 +39,7 @@ const PdfDialog = ({ pdf }) => {
             </div>
           </div>
         </div>
-        <div className="space-y-6 px-6 pt-3 pb-6">
+        <div className="space-y-6 dialog-body-padding">
           <DialogHeader>
             <DialogTitle>{pdf.title}</DialogTitle>
             <DialogDescription>

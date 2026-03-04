@@ -66,23 +66,23 @@ const QuizPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background container-padding py-10 text-foreground">
-      <div className="">
+    <div className="min-h-screen bg-background container-padding page-padding-y text-foreground">
+      <div>
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-section">
           <h1 className="heading-1">Advanced Docker Concepts Quiz</h1>
-          <Button size="lg" className="px-8" onClick={handleSubmit}>
+          <Button size="lg" onClick={handleSubmit}>
             Submit Quiz
           </Button>
         </div>
 
         {/* Progress Section */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
+        <div className="mb-component">
+          <div className="flex justify-between items-center mb-element">
             <span className="heading-4">
               Question {currentQuestion} of {totalQuestions}
             </span>
-            <Badge variant="secondary" className="px-4 py-2 text-base">
+            <Badge variant="secondary">
               <Clock className="icon-md mr-2" />
               {timeRemaining}
             </Badge>
@@ -91,9 +91,9 @@ const QuizPage = () => {
         </div>
 
         {/* Question Card */}
-        <Card className="mb-8">
+        <Card className="mb-component">
           <CardHeader>
-            <CardTitle className="text-xl sm:text-xl leading-relaxed">
+            <CardTitle className="body-large">
               Why is Docker Lorem ipsum dolor sit amet consectetur adipisicing elit.considered
               essential for modern application development and deployment?
             </CardTitle>
@@ -101,7 +101,7 @@ const QuizPage = () => {
         </Card>
 
         {/* Options */}
-        <div className="grid grid-cols-2 gap-4 mb-14">
+        <div className="grid-options mb-section">
           {quizOptions.map((option) => (
             <Card
               key={option.id}

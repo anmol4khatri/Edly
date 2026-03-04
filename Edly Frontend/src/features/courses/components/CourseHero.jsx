@@ -8,7 +8,7 @@ const CourseHero = () => {
       {/* Mobile Layout */}
       <div className="block lg:hidden">
         {/* Course Thumbnail */}
-        <div className="w-full pb-6">
+        <div className="w-full pb-component">
           <img
             src="https://ik.imagekit.io/sheryians/courses_gif/undefined-maxresdefault_5-AHh9_1Y.jpg"
             alt="Course Thumbnail"
@@ -54,7 +54,7 @@ const CourseHero = () => {
               Docker & Kubernetes Masterclass: Build, Deploy, & Scale on AWS, Azure, & GCP.
             </CardDescription>
           </CardHeader>
-          <CardFooter className="flex gap-5 mt-6 2xl:-mt-6">
+          <CardFooter className="flex gap-6 mt-2 2xl:mt-1">
             <RatingDisplay rating={4.8} />
             <span className="text-muted-foreground text-xl">|</span>
             <span className="flex items-center gap-2">

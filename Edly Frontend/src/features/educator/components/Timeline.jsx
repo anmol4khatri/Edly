@@ -44,7 +44,7 @@ const Timeline = ({ step = 1 }) => {
                 </div>
                 <div className="-translate-y-1.5 pb-8 text-muted-foreground">
                   <p className="heading-4">{item.title}</p>
-                  <small className="mt-2 body-small">{item.description}</small>
+                  <small className="mt-element body-small">{item.description}</small>
                 </div>
               </div>
             </div>

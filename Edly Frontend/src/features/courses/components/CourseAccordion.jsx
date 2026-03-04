@@ -178,7 +178,7 @@ const CourseAccordion = () => {
   };
 
   return (
-    <div className="py-5 w-full lg:w-8/12 space-y-4 mt-5">
+    <div className="py-5 w-full lg:w-8/12 space-y-4 mt-section">
       <h3 className="heading-2">Comprehensive Course Modules</h3>
       <Accordion type="single" collapsible className="-space-y-px w-full" defaultValue="3">
         {modules.map((module) => (
@@ -194,7 +194,7 @@ const CourseAccordion = () => {
               {module.content.map((item) => (
                 <div
                   key={item.data._id}
-                  className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-accent/50 cursor-pointer transition-colors"
+                  className="content-item w-full hover:bg-accent/50 cursor-pointer transition-colors"
                   onClick={() => handleItemClick()}
                 >
                   {getContentIcon(item.type)}

@@ -14,7 +14,7 @@ const CourseCard = ({ price }) => {
   const navigate = useNavigate();
 
   return (
-    <Card className="max-w-lg pt-0 gap-3 pb-4 card-interactive">
+    <Card className="max-w-lg pt-0 gap-3 pb-component card-interactive">
       <CardContent className="px-0">
         <img
           src="https://ik.imagekit.io/sheryians/courses_gif/undefined-maxresdefault_5-AHh9_1Y.jpg"

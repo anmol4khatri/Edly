@@ -2,7 +2,7 @@ import { CreateAccountForm } from '@/features/auth/components/create-account-for
 
 const SignupStudent = () => {
   return (
-    <div className="flex flex-col gap-4 p-6 md:p-10 min-h-screen bg-background text-foreground">
+    <div className="flex flex-col gap-4 page-padding min-h-screen bg-background text-foreground">
       <a href="#" className="w-30">
         <img src="/edly.png" alt="logo" />
       </a>

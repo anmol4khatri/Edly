@@ -10,7 +10,7 @@ const OnboardingPage = () => {
       </div>
 
       {/* Right div */}
-      <div className="flex flex-col gap-4 p-6 md:p-10">
+      <div className="flex flex-col gap-4 page-padding">
         <a href="#" className="w-30">
           <img src="/edly.png" alt="logo" />
         </a>

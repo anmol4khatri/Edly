@@ -193,11 +193,11 @@ const VideoAccordion = () => {
           <AccordionItem
             key={module._id}
             value={`item-${index + 1}`}
-            className="data-[state=open]:bg-card rounded-lg border-none px-4 transition-colors duration-200"
+            className="data-[state=open]:bg-card rounded-lg border-none card-padding-sm transition-colors duration-200"
           >
             <AccordionTrigger className="heading-4">{module.title}</AccordionTrigger>
             <AccordionContent className="text-muted-foreground body-default">
-              <div className="space-y-2 mt-4">
+              <div className="space-y-2 mt-component">
                 {module.content.map((item) => {
                   if (item.type === 'quiz') {
                     return <QuizRulesDialog key={item.data._id} quiz={item.data} />;
@@ -211,7 +211,7 @@ const VideoAccordion = () => {
                     <div
                       key={item.data._id}
                       onClick={() => handleContentClick(item)}
-                      className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+                      className={`content-item ${
                         currentPlayingVideo === item.data._id && item.type === 'lesson'
                           ? 'bg-primary/10 text-foreground shadow-sm'
                           : 'hover:bg-accent/50 text-foreground'

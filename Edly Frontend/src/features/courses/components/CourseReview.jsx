@@ -91,13 +91,13 @@ export default function Component() {
   return (
     <>
       {/* Desktop Masonry Grid */}
-      <div className="hidden md:block py-6 w-full lg:w-8/12 mb-10">
-        <div className="mb-4">
-          <h2 className="heading-2 mb-2">Recent Reviews</h2>
+      <div className="hidden md:block py-4 md:py-6 w-full lg:w-8/12 mb-section">
+        <div className="mb-element">
+          <h2 className="heading-2 mb-element">Recent Reviews</h2>
         </div>
         <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
           {courseReviews.map((courseReview, index) => (
-            <Card key={index} className="break-inside-avoid mb-4">
+            <Card key={index} className="break-inside-avoid mb-element">
               <CardHeader>
                 <CardTitle>
                   {courseReview.name}
@@ -119,10 +119,10 @@ export default function Component() {
       </div>
 
       {/* Mobile Feed Layout */}
-      <div className="md:hidden pb-10">
+      <div className="md:hidden pb-section">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
-          <div className="sticky top-0 bg-background/95 backdrop-blur-sm border-b border-border p-4 z-10">
+          <div className="sticky top-0 bg-background/95 backdrop-blur-sm border-b border-border card-padding z-10">
             <h2 className="heading-3">Recent Reviews</h2>
           </div>
 
@@ -130,7 +130,7 @@ export default function Component() {
           <div className="divide-y divide-border">
             {courseReviews.map((courseReview) => (
               <Card key={courseReview.id} className="bg-transparent border-none rounded-none">
-                <CardContent className="p-4">
+                <CardContent className="card-padding">
                   <div className="flex flex-col gap-2">
                     {/* User Info */}
                     <div className="flex items-center justify-between">

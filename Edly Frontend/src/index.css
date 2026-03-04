@@ -282,6 +282,106 @@
     @apply py-8 md:py-12 lg:py-16;
   }
 
+  /* Page Layout Utilities */
+  .page-padding {
+    @apply p-6 md:p-10;
+  }
+
+  .page-padding-y {
+    @apply py-10 max-sm:py-4;
+  }
+
+  /* Responsive Gap */
+  .gap-section {
+    @apply gap-8 md:gap-10;
+  }
+
+  /* Responsive Margins */
+  .mb-section {
+    @apply mb-8 md:mb-10;
+  }
+
+  .mb-component {
+    @apply mb-4 md:mb-6;
+  }
+
+  .mb-element {
+    @apply mb-2 md:mb-4;
+  }
+
+  .mt-section {
+    @apply mt-8 md:mt-10;
+  }
+
+  .mt-component {
+    @apply mt-4 md:mt-6;
+  }
+
+  .mt-element {
+    @apply mt-2 md:mt-4;
+  }
+
+  /* Responsive Padding */
+  .pt-section {
+    @apply pt-8 md:pt-10;
+  }
+
+  .pb-section {
+    @apply pb-8 md:pb-10;
+  }
+
+  .pb-component {
+    @apply pb-4 md:pb-6;
+  }
+
+  /* Card Content Padding */
+  .card-padding {
+    @apply p-4 md:p-6;
+  }
+
+  .card-padding-sm {
+    @apply p-3 md:p-4;
+  }
+
+  /* Grid Layouts */
+  .grid-cards {
+    @apply flex flex-wrap gap-8 justify-center;
+  }
+
+  .grid-cards-padding {
+    @apply px-20 pt-8 max-sm:px-4 max-sm:pt-3;
+  }
+
+  .grid-options {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .grid-highlights {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-6;
+  }
+
+  /* Content List Item */
+  .content-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer;
+  }
+
+  .content-item-hover {
+    @apply hover:bg-accent;
+  }
+
+  /* Dialog Spacing */
+  .dialog-header-padding {
+    @apply px-6 py-4;
+  }
+
+  .dialog-body-padding {
+    @apply px-6 py-4;
+  }
+
+  .dialog-footer-padding {
+    @apply px-6 py-4;
+  }
+
   /* Typography Utilities */
   .heading-1 {
     @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;

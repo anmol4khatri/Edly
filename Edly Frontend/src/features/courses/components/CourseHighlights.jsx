@@ -47,7 +47,7 @@ const CourseHighlights = () => {
       {/* Desktop Layout */}
       <div className="hidden lg:block py-5">
         <h3 className="heading-2 py-5">What you&apos;ll learn</h3>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-6 w-full md:w-10/12 lg:w-8/12 bg-card p-6 rounded-lg">
+        <div className="grid-highlights w-full md:w-10/12 lg:w-8/12 bg-card card-padding rounded-lg">
           {highlights.map((text, index) => (
             <HighlightItem key={index} text={text} className="min-h-[80px]" />
           ))}
